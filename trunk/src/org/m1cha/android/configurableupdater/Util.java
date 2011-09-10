@@ -1,6 +1,7 @@
 package org.m1cha.android.configurableupdater;
 
 import java.io.BufferedReader;
+import android.view.View.OnClickListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -8,10 +9,17 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 
 public class Util {
@@ -107,5 +115,61 @@ public class Util {
     	    }
     	}
     	return null;
+    }
+    
+    public static String getEntryContentAsString(ZipFile zipFile, ZipEntry entry) throws IOException, Long2IntegerException {
+    	/** open info-file */
+		InputStream is = zipFile.getInputStream(entry);
+		InputStreamReader isr = new InputStreamReader(is);
+		
+		/** get file-size (as integer) */
+		if(entry.getSize()>Integer.MAX_VALUE) {
+			throw(new Long2IntegerException());
+		}
+		int size = Integer.parseInt(Long.toString(entry.getSize()));
+		
+		/** read version-File */
+		String result = "";
+		char[] buffer = new char[size];
+        while (isr.read(buffer, 0, buffer.length) != -1)
+        {
+            String s = new String(buffer);
+            result+=s;
+        }
+        
+        /** close streams */
+        isr.close();
+        is.close();
+        
+        /** return */
+        return result;
+    }
+    
+    private static Dialog popup;
+    public static void showPopup(Context context, CharSequence title, String content) {
+    	
+    	/** create dialog */
+    	popup = new Dialog(context);
+    	popup.setTitle(title);
+    	popup.setCancelable(true);
+    	popup.getContext().getTheme().applyStyle(R.style.popup_title, false);
+    	popup.setContentView(R.layout.popup);
+    	
+    	/** set content */
+    	WebView webview = (WebView) popup.findViewById(R.id.popup_webView);
+    	webview.setBackgroundColor(Color.TRANSPARENT);
+    	webview.loadData(content, "texl/html", "utf-8");
+    	
+    	/** set onclick-Listener */
+    	popup.findViewById(R.id.popup_buttonClose).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				popup.dismiss();
+			}
+		});
+    	
+    	/** show dialog */
+    	popup.show();
     }
 }

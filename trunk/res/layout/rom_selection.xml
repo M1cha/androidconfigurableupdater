@@ -13,19 +13,18 @@
         <LinearLayout
           android:layout_height="wrap_content"  
           android:layout_width="fill_parent">
-           <Button
-             android:id="@+id/rom_selection_spinnerRoms" 
+           <Spinner
+             android:id="@+id/rom_selection_buttonRoms" 
              android:layout_width="wrap_content" 
              android:layout_weight="1" 
-             android:layout_height="wrap_content"
-             android:text="@string/lang_rom_selection_spinnerRoms"
+             android:layout_height="50dip"
+             android:text="@string/lang_rom_selection_buttonRoms"
              android:gravity="left|center_vertical"
-             android:drawableRight="@android:drawable/arrow_down_float"
-             android:onClick="onClickHandler">
-           </Button>
+             android:drawableRight="@android:drawable/arrow_down_float">
+           </Spinner>
            <Spinner 
              android:layout_height="0pt" 
-             android:id="@+id/spinner1" 
+             android:id="@+id/rom_selection_spinner" 
              android:layout_width="0pt" 
              android:layout_weight="0">
            </Spinner>
@@ -37,9 +36,9 @@
           android:layout_weight="1">
             <ImageView 
               android:src="@drawable/icon" 
-              android:id="@+id/imageView1" 
               android:layout_width="match_parent" 
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:id="@+id/rom_selection_cover">
             </ImageView>
         </LinearLayout>
         
@@ -53,7 +52,8 @@
 	          android:layout_width="fill_parent" 
 	          android:layout_height="wrap_content" 
 	          android:layout_weight="1"
-	          android:onClick="onClickHandler">
+	          android:onClick="onClickHandler"
+	          android:enabled="false">
 	        </Button>
 	        <Button 
 	          android:text="@string/lang_rom_selection_buttonNext" 
