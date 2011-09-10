@@ -10,7 +10,6 @@ import org.json.JSONException;
 import org.m1cha.android.configurableupdater.Logger;
 import org.m1cha.android.configurableupdater.R;
 import org.m1cha.android.configurableupdater.Util;
-import org.m1cha.android.configurableupdater.R.string;
 import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -83,6 +82,8 @@ public class RomList {
 				} catch (Long2IntegerException e) {
 					Logger.debug("File '"+fileName+"' has a version-file which is too big.");
 				} catch (JSONException e) {
+					Logger.debug("File '"+fileName+"' has an error in it's version-file.");
+				} catch (NullPointerException e) {
 					Logger.debug("File '"+fileName+"' has an error in it's version-file.");
 				}
 			}

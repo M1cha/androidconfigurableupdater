@@ -2,10 +2,9 @@ package org.m1cha.android.configurableupdater;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import org.m1cha.android.configurableupdater.romtools.RomList;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -20,10 +19,9 @@ import android.widget.Spinner;
 public class MainActivity extends Activity {
 	
 	private int currentView = R.layout.intro;
-	private RomList romList;
+	public RomList romList;
 	private String[] romNames;
 	private Spinner spinner_roms;
-	public static String TAG = "UPDATER";
 	private String changelog;
 	
     /** Called when the activity is first created. */
@@ -80,7 +78,8 @@ public class MainActivity extends Activity {
     			this.spinner_roms.performClick();
     		break;
     		case R.id.rom_selection_buttonNext:
-    			Util.alert(this, "Not implemented!");
+    			Intent i = new Intent(this, OptionSelection.class);
+    			startActivity(i);
     		break;
     		case R.id.rom_selection_buttonChangelog:
     			if(this.changelog!=null) {
@@ -130,6 +129,9 @@ public class MainActivity extends Activity {
 	
 	private void showRomSelection() {
 		
+		/** saves vars */
+		DataStore.romlist = this.romList;
+		
 		/** get romList */
 		this.romList = new RomList(this, "miuiupdater");
 		this.romNames = this.romList.getRomNames();
@@ -172,6 +174,9 @@ public class MainActivity extends Activity {
 		else {
 			findViewById(R.id.rom_selection_buttonChangelog).setEnabled(false);
 		}
+		
+		/** set current ROM */
+		DataStore.currentRom = this.romList.getRom(index);
         
 	}
 }

@@ -3,6 +3,7 @@ package org.m1cha.android.configurableupdater.romtools;
 public class OptionObject {
 	private String category;
 	private String displayname;
+	private String summary;
 	private int defaultValue;
 	private String type;
 	private String[] items;
@@ -23,6 +24,14 @@ public class OptionObject {
 	}
 	public void setDisplayName(String s) {
 		this.displayname = s;
+	}
+	
+	/** SUMMARY */
+	public String getSummary() {
+		return this.summary;
+	}
+	public void setSummary(String s) {
+		this.summary = s;
 	}
 	
 	/** TYPE */
@@ -57,7 +66,7 @@ public class OptionObject {
 		this.values = sr;
 	}
 	
-	/** VALUES */
+	/** VALUE */
 	public String getValue() {
 		return this.value;
 	}

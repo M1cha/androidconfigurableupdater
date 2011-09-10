@@ -17,7 +17,7 @@ public class RomObject {
 	private String coverFilename;
 	private Bitmap coverBitmap;
 	
-	public RomObject(String updaterFile, String filename) throws JSONException {
+	public RomObject(String updaterFile, String filename) throws JSONException, NullPointerException {
 		/** parse JSON-String */
 		JSONObject updater = new JSONObject(updaterFile);
 		
@@ -46,6 +46,7 @@ public class RomObject {
 			
 			/** get and save option-values */
 			option.setCategory(jsonOption.getString("category"));
+			if(jsonOption.has("summary")) option.setSummary(jsonOption.getString("summary"));
 			option.setDisplayName(jsonOption.getString("displayname"));
 			option.setType(jsonOption.getString("type"));
 			option.setDefaultValue(jsonOption.getInt("default"));
