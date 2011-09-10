@@ -60,9 +60,11 @@ public class RomList {
 					
 					
 					/** convert and save cover */
-					ZipEntry coverEntry = zipFile.getEntry(romObject.getCoverFilename());
-					InputStream is = zipFile.getInputStream(coverEntry);
-					romObject.setCover(BitmapFactory.decodeStream(is));
+					if(zipFile.getEntry(romObject.getCoverFilename())!=null) {
+						ZipEntry coverEntry = zipFile.getEntry(romObject.getCoverFilename());
+						InputStream is = zipFile.getInputStream(coverEntry);
+						romObject.setCover(BitmapFactory.decodeStream(is));
+					}
 					
 					/** close zip-file */
 					zipFile.close();
