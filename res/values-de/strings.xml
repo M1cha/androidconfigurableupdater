@@ -10,9 +10,12 @@
     <string name="lang_rom_selection_title">Rom Auswählen</string>
     <string name="lang_rom_selection_buttonNext">Weiter</string>
     <string name="lang_rom_selection_buttonNoRom">Keine Rom?</string>
-    <string name="lang_rom_selection_spinnerRoms">Rom auswählen...</string>
+    <string name="lang_rom_selection_buttonRoms">Rom auswählen...</string>
     <string name="lang_rom_selection_buttonChangelog">Changelog</string>
     <string name="lang_optionSelection_title">Optionen auswählen</string>
     <string name="lang_optionSelection_buttonSave">Speichern</string>
     <string name="lang_optionSelection_buttonReboot">Reboot</string>
+    <string name="lang_error_sdcard">Fehler beim Zugriff auf die SD-Karte!</string>
+    <string name="lang_popup_buttonClose">Schließen</string>
+    <string name="lang_romChangelog_title">Changelog</string>
 </resources>

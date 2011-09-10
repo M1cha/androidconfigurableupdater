@@ -8,10 +8,20 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.Spinner;
 
 public class MainActivity extends Activity {
 	
 	private int currentView = R.layout.intro;
+	private RomList romList;
+	private String[] romNames;
+	private Spinner spinner_roms;
+	public static String TAG = "UPDATER";
+	private String changelog;
 	
     /** Called when the activity is first created. */
     @Override
@@ -63,13 +73,16 @@ public class MainActivity extends Activity {
     			showView(R.layout.rom_selection);
     		break;
     		
-    		case R.id.rom_selection_spinnerRoms:
+    		case R.id.rom_selection_buttonRoms:
+    			this.spinner_roms.performClick();
     		break;
     		case R.id.rom_selection_buttonNext:
     			Util.alert(this, "Not implemented!");
     		break;
     		case R.id.rom_selection_buttonChangelog:
-    			Util.alert(this, "Not implemented!");
+    			if(this.changelog!=null) {
+    				Util.showPopup(this, getString(R.string.lang_romChangelog_title), changelog);
+    			}
     		break;
     	}
     }
@@ -91,7 +104,7 @@ public class MainActivity extends Activity {
     		showManual();
     	}
     	else if(layoutID==R.layout.rom_selection) {
-    		
+    		showRomSelection();
     	}
     	
     }
@@ -111,4 +124,43 @@ public class MainActivity extends Activity {
         manual_content.setBackgroundColor(Color.BLACK);
         manual_content.loadData(text,"texl/html","utf-8");
     }
+	
+	private void showRomSelection() {
+		
+		/** get romList */
+		this.romList = new RomList(this, "miuiupdater");
+		this.romNames = this.romList.getRomNames();
+		
+		/** add roms to spinner */
+		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, romNames);
+		this.spinner_roms = (Spinner)findViewById(R.id.rom_selection_buttonRoms);
+		this.spinner_roms.setAdapter(spinnerArrayAdapter);
+		
+		/** onclick-Listener for spinner */
+		this.spinner_roms.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> av, View v, int index, long l_index) {
+				MainActivity.this.RomSelection_setRom(index);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+			}
+		});
+	}
+	
+	public void RomSelection_setRom(int index) {
+		this.changelog = this.romList.getRom(index).getChangelog();
+		ImageView myImage = (ImageView) findViewById(R.id.rom_selection_cover);
+		myImage.setImageBitmap(this.romList.getRom(index).getCover());
+		
+		if(changelog.length()>0) {
+			findViewById(R.id.rom_selection_buttonChangelog).setEnabled(true);
+		}
+		else {
+			findViewById(R.id.rom_selection_buttonChangelog).setEnabled(false);
+		}
+        
+	}
 }
