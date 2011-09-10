@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidConfigurableUpdater</string>
+    <string name="lang_intro_buttonManual">Anleitung</string>
+    <string name="lang_manual_buttonNext">Weiter</string>
+    <string name="lang_manual_title">Anleitung</string>
+    <string name="lang_error_loadManual">Fehler beim laden der Anleitung!</string>
+    <string name="lang_menuMain_buttonExit">Beenden</string>
+    <string name="lang_intro_buttonNext">Weiter</string>
+    <string name="lang_rom_selection_title">Rom Auswählen</string>
+    <string name="lang_rom_selection_buttonNext">Weiter</string>
+    <string name="lang_rom_selection_buttonNoRom">Keine Rom?</string>
+    <string name="lang_rom_selection_spinnerRoms">Rom auswählen...</string>
+    <string name="lang_rom_selection_buttonChangelog">Changelog</string>
+    <string name="lang_optionSelection_title">Optionen auswählen</string>
+    <string name="lang_optionSelection_buttonSave">Speichern</string>
+    <string name="lang_optionSelection_buttonReboot">Reboot</string>
+</resources>

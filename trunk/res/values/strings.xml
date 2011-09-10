@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, MainActivity!</string>
     <string name="app_name">AndroidConfigurableUpdater</string>
+    <string name="lang_intro_buttonManual">Manual</string>
+    <string name="lang_manual_buttonNext">Next</string>
+    <string name="lang_manual_title">Manual</string>
+    <string name="lang_error_loadManual">Error loading the manual!</string>
+    <string name="lang_menuMain_buttonExit">Exit</string>
+    <string name="lang_intro_buttonNext">Next</string>
+    <string name="lang_rom_selection_title">Select ROM</string>
+    <string name="lang_rom_selection_buttonNext">Weiter</string>
+    <string name="lang_rom_selection_buttonNoRom">No Rom?</string>
+    <string name="lang_rom_selection_spinnerRoms">Select a ROM...</string>
+    <string name="lang_rom_selection_buttonChangelog">Changelog</string>
+    <string name="lang_optionSelection_title">Select options</string>
+    <string name="lang_optionSelection_buttonSave">Save</string>
+    <string name="lang_optionSelection_buttonReboot">Reboot</string>
 </resources>
