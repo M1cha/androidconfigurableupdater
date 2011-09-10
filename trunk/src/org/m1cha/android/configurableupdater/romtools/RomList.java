@@ -1,4 +1,4 @@
-package org.m1cha.android.configurableupdater;
+package org.m1cha.android.configurableupdater.romtools;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.json.JSONException;
+import org.m1cha.android.configurableupdater.Logger;
+import org.m1cha.android.configurableupdater.R;
+import org.m1cha.android.configurableupdater.Util;
+import org.m1cha.android.configurableupdater.R.string;
 import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
 import android.content.Context;
 import android.graphics.BitmapFactory;
