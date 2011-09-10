@@ -2,6 +2,9 @@ package org.m1cha.android.configurableupdater;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.m1cha.android.configurableupdater.romtools.RomList;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;

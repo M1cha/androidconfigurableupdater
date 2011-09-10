@@ -1,4 +1,4 @@
-package org.m1cha.android.configurableupdater;
+package org.m1cha.android.configurableupdater.romtools;
 
 public class OptionObject {
 	private String category;
