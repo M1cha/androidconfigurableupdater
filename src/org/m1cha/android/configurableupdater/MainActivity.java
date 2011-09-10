@@ -151,10 +151,18 @@ public class MainActivity extends Activity {
 	}
 	
 	public void RomSelection_setRom(int index) {
-		this.changelog = this.romList.getRom(index).getChangelog();
-		ImageView myImage = (ImageView) findViewById(R.id.rom_selection_cover);
-		myImage.setImageBitmap(this.romList.getRom(index).getCover());
 		
+		/** set cover */
+		ImageView myImage = (ImageView) findViewById(R.id.rom_selection_cover);
+		if(this.romList.getRom(index).getCover()!=null) {
+			myImage.setImageBitmap(this.romList.getRom(index).getCover());
+		}
+		else {
+			myImage.setImageResource(R.drawable.nocover);
+		}
+		
+		/** set changelog */
+		this.changelog = this.romList.getRom(index).getChangelog();
 		if(changelog.length()>0) {
 			findViewById(R.id.rom_selection_buttonChangelog).setEnabled(true);
 		}
