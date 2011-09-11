@@ -100,6 +100,23 @@ public class MainActivity extends Activity {
     			Intent i = new Intent(this, MainPreferenceActivity.class);
     			startActivity(i);
     		break;
+    		
+    		case R.id.menuMain_itemFeedback:
+    			/** receiver */
+    			String[] mailto = { "m1cha-dev@web.de" };
+    			
+			    /** create intent */
+			    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+			    
+			    /** set attributes */
+			    sendIntent.putExtra(Intent.EXTRA_EMAIL, mailto);
+			    sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.lang_menuMain_itemFeedSubject));
+			    sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+			    sendIntent.setType("text/plain");
+			    
+			    /** start */
+			    startActivity(Intent.createChooser(sendIntent, getString(R.string.lang_menuMain_itemFeedSubject)));
+    		break;
     	}
     	
     	return super.onOptionsItemSelected(item);

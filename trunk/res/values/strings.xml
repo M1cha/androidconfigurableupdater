@@ -11,6 +11,9 @@
     <string name="lang_error_nothingChanged">Please change any options!</string>
     <string name="lang_error_fileExists">Another file with the new name already exists!</string>
     <string name="lang_menuMain_itemSettings">Settings</string>
+    <string name="lang_menuMain_itemFeedback">Feedback</string>
+    <string name="lang_menuMain_itemFeedSubject">Feedback to Updater-App</string>
+    <string name="lang_menuMain_itemAbout">About</string>
     <string name="lang_menuMain_prefPathTitle">ROM-Directory</string>
     <string name="lang_menuMain_buttonReset">Restore Settings</string>
     <string name="lang_menuMain_msgRestore">Success!</string>
