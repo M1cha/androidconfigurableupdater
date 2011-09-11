@@ -106,11 +106,15 @@ public class RomObject {
 				
 				/** overwrite json-default with filename-options */
 				for(int i=1; i<romNameOptions.length; i++) {
+					boolean found=false;
 					for(int z=0; z<values.length; z++) {
 						if(values[z].equals(romNameOptions[i])) {
 							option.setDefaultValue(z);
+							found=true;
+							break;
 						}
 					}
+					if(found) break;
 				}
 			}
 			else {
@@ -121,6 +125,10 @@ public class RomObject {
 				for(int i=1; i<romNameOptions.length; i++) {
 					if(romNameOptions[i].equals(option.getValue())) {
 						option.setDefaultValue(1);
+						break;
+					}
+					else {
+						option.setDefaultValue(0);
 					}
 				}
 			}

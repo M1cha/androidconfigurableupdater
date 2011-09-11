@@ -2,12 +2,10 @@ package org.m1cha.android.configurableupdater;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import org.m1cha.android.configurableupdater.romtools.OptionObject;
 import org.m1cha.android.configurableupdater.romtools.RomObject;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
