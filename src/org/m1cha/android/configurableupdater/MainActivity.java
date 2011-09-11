@@ -30,11 +30,17 @@ public class MainActivity extends Activity {
 	private String changelog;
 	private SharedPreferences preferences;
 	private static String romFolder;
+	private static MainActivity object;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        /** save this to an static object
+         *  not good but needed for 'reloadRomSelection'
+         */
+        object = this;
         
         /** restore saved instance */
         if(savedInstanceState!=null) {
@@ -150,6 +156,10 @@ public class MainActivity extends Activity {
     	}
     	
     }
+    
+    public static void reloadRomSelection() {
+    	object.showView(R.layout.rom_selection);
+    }
 
 	private void showManual() {
     	/** load manual */
@@ -168,9 +178,6 @@ public class MainActivity extends Activity {
     }
 	
 	private void showRomSelection() {
-		
-		/** saves vars */
-		DataStore.romlist = this.romList;
 		
 		/** get romList */
 		this.romList = new RomList(this, MainActivity.romFolder);

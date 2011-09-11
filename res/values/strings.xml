@@ -7,6 +7,9 @@
     <string name="lang_error_loadManual">Error loading the manual!</string>
     <string name="lang_error_sdcard">Unable to open SDCARD!</string>
     <string name="lang_error_directory">The specified folder does not exists!</string>
+    <string name="lang_error_writeNewFile">Unable to gain write-access!</string>
+    <string name="lang_error_nothingChanged">Please change any options!</string>
+    <string name="lang_error_fileExists">Another file with the new name already exists!</string>
     <string name="lang_menuMain_itemSettings">Settings</string>
     <string name="lang_menuMain_prefPathTitle">ROM-Directory</string>
     <string name="lang_menuMain_buttonReset">Restore Settings</string>

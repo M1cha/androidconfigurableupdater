@@ -1,11 +1,13 @@
 package org.m1cha.android.configurableupdater;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.m1cha.android.configurableupdater.romtools.OptionObject;
 import org.m1cha.android.configurableupdater.romtools.RomObject;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
@@ -177,6 +179,8 @@ public class OptionSelection extends PreferenceActivity {
 	public void onClickHandler(View v) {
 		
 		if(v==OptionSelection.this.buttonSave) {
+			
+			/** generate parameter from GUI */
 			String parameter = "";
 			for(int i=0; i<this.options.size(); i++) {
 				OptionObject option = this.options.get(i);
@@ -198,12 +202,38 @@ public class OptionSelection extends PreferenceActivity {
 				}
 				
 			}
-			Logger.debug(parameter);
-			Util.alert(this, parameter);
+			
+			/** create new file-object */
+			File newFile = new File(this.currentRom.getFile().getParent(), this.currentRom.getRomName()+parameter+".zip");
+			
+			/** check if anything was changed */
+			if(newFile.getName().equals(this.currentRom.getFile().getName())) {
+				Util.alert(this, getString(R.string.lang_error_nothingChanged));
+				return;
+			}
+			
+			/** check if we can write */
+			if(!this.currentRom.getFile().canWrite()) {
+				Util.alert(this, getString(R.string.lang_error_writeNewFile));
+				return;
+			}
+			
+			/** check if file already exists */
+			if(newFile.exists()) {
+				Util.alert(this, getString(R.string.lang_error_fileExists));
+				return;
+			}
+			
+			/** rename file */
+			this.currentRom.getFile().renameTo(newFile);
+			
+			/** reload romSelection and exit */
+			MainActivity.reloadRomSelection();
+			finish();
 		}
 		
 		else if(v==OptionSelection.this.buttonReboot) {
-			Util.alert(v.getContext(), "Nicht implementiert!");
+			Util.alert(this, "Not implemented!");
 		}
 	}
 }

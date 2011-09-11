@@ -7,6 +7,9 @@
     <string name="lang_error_loadManual">Fehler beim laden der Anleitung!</string>
     <string name="lang_error_sdcard">Fehler beim Zugriff auf die SD-Karte!</string>
     <string name="lang_error_directory">Der angegebene Ordner existiert nicht!</string>
+    <string name="lang_error_writeNewFile">Kein Schreib-Zugriff auf die SD-Karte!</string>
+    <string name="lang_error_nothingChanged">Es wurden keine Optionen geändert!</string>
+    <string name="lang_error_fileExists">Es exitiert bereits eine Datei mit dem neuen Namen!</string>
     <string name="lang_menuMain_itemSettings">Einstellungen</string>
     <string name="lang_menuMain_prefPathTitle">ROM-Verzeichnis</string>
     <string name="lang_menuMain_buttonReset">Einstellungen zurücksetzen</string>
