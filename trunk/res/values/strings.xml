@@ -5,7 +5,12 @@
     <string name="lang_manual_buttonNext">Next</string>
     <string name="lang_manual_title">Manual</string>
     <string name="lang_error_loadManual">Error loading the manual!</string>
-    <string name="lang_menuMain_buttonExit">Exit</string>
+    <string name="lang_error_sdcard">Unable to open SDCARD!</string>
+    <string name="lang_error_directory">The specified folder does not exists!</string>
+    <string name="lang_menuMain_itemSettings">Settings</string>
+    <string name="lang_menuMain_prefPathTitle">ROM-Directory</string>
+    <string name="lang_menuMain_buttonReset">Restore Settings</string>
+    <string name="lang_menuMain_msgRestore">Success!</string>
     <string name="lang_intro_buttonNext">Next</string>
     <string name="lang_rom_selection_title">Select ROM</string>
     <string name="lang_rom_selection_buttonNext">Next</string>
@@ -15,8 +20,7 @@
     <string name="lang_optionSelection_title">Select options</string>
     <string name="lang_optionSelection_buttonSave">Save</string>
     <string name="lang_optionSelection_buttonReboot">Reboot</string>
-    <string name="lang_error_sdcard">Unable to open SDCARD!</string>
     <string name="lang_popup_buttonClose">Close</string>
     <string name="lang_romChangelog_title">Changelog</string>
-    
+    <string name="default_romFolder">miuiupdater</string>
 </resources>

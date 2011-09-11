@@ -5,9 +5,14 @@ import java.io.InputStream;
 import org.m1cha.android.configurableupdater.romtools.RomList;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
@@ -23,15 +28,31 @@ public class MainActivity extends Activity {
 	private String[] romNames;
 	private Spinner spinner_roms;
 	private String changelog;
+	private SharedPreferences preferences;
+	private static String romFolder;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        /** restore saved instance */
         if(savedInstanceState!=null) {
         	currentView = savedInstanceState.getInt("currentView");
         }
+        
+        /** shared preferences */
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        
+        /** get rom-folder */
+        MainActivity.romFolder = preferences.getString("romfolder", getString(R.string.default_romFolder));
+        
+        /** show view */
         showView(currentView);
+    }
+    
+    public static void setRomFolder(String s) {
+    	MainActivity.romFolder = s;
     }
     
     @Override
@@ -57,6 +78,25 @@ public class MainActivity extends Activity {
         	}
         }
         return false;
+    }
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_main, menu);
+		return true;
+	}
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	switch(item.getItemId()) {
+    		case R.id.menuMain_itemSettings:
+    			Intent i = new Intent(this, MainPreferenceActivity.class);
+    			startActivity(i);
+    		break;
+    	}
+    	
+    	return super.onOptionsItemSelected(item);
     }
     
     /** onClick-Handler */
@@ -133,7 +173,7 @@ public class MainActivity extends Activity {
 		DataStore.romlist = this.romList;
 		
 		/** get romList */
-		this.romList = new RomList(this, "miuiupdater");
+		this.romList = new RomList(this, MainActivity.romFolder);
 		this.romNames = this.romList.getRomNames();
 		
 		/** add roms to spinner */

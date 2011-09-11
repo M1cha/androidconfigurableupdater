@@ -5,7 +5,12 @@
     <string name="lang_manual_buttonNext">Weiter</string>
     <string name="lang_manual_title">Anleitung</string>
     <string name="lang_error_loadManual">Fehler beim laden der Anleitung!</string>
-    <string name="lang_menuMain_buttonExit">Beenden</string>
+    <string name="lang_error_sdcard">Fehler beim Zugriff auf die SD-Karte!</string>
+    <string name="lang_error_directory">Der angegebene Ordner existiert nicht!</string>
+    <string name="lang_menuMain_itemSettings">Einstellungen</string>
+    <string name="lang_menuMain_prefPathTitle">ROM-Verzeichnis</string>
+    <string name="lang_menuMain_buttonReset">Einstellungen zurücksetzen</string>
+    <string name="lang_menuMain_msgRestore">Erfolgreich!</string>
     <string name="lang_intro_buttonNext">Weiter</string>
     <string name="lang_rom_selection_title">Rom Auswählen</string>
     <string name="lang_rom_selection_buttonNext">Weiter</string>
@@ -15,7 +20,6 @@
     <string name="lang_optionSelection_title">Optionen auswählen</string>
     <string name="lang_optionSelection_buttonSave">Speichern</string>
     <string name="lang_optionSelection_buttonReboot">Reboot</string>
-    <string name="lang_error_sdcard">Fehler beim Zugriff auf die SD-Karte!</string>
     <string name="lang_popup_buttonClose">Schließen</string>
     <string name="lang_romChangelog_title">Changelog</string>
 </resources>
