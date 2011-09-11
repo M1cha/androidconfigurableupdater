@@ -1,5 +1,6 @@
 package org.m1cha.android.configurableupdater.romtools;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -15,9 +16,11 @@ public class RomObject {
 	private String version;
 	private ArrayList<OptionObject> options = new ArrayList<OptionObject>();
 	private String filename;
+	private String romName;
 	private String changelog;
 	private String coverFilename;
 	private Bitmap coverBitmap;
+	private File fileobject;
 	private Pattern p = Pattern.compile("[-]+");
 	
 	public RomObject(String updaterFile, String filename) throws JSONException, NullPointerException {
@@ -37,6 +40,9 @@ public class RomObject {
 		/** save filename */
 		this.filename = filename;
 		Logger.debug("[RomObject] got filename");
+		
+		/** make clean romName */
+		this.romName = p.split(filename.substring(0, filename.length()-4), 2)[0];
 		
 		/** save changelog */
 		this.changelog = updater.get("changelog").toString();
@@ -149,5 +155,16 @@ public class RomObject {
 	}
 	public void setCover(Bitmap b) {
 		this.coverBitmap = b;
+	}
+	
+	public File getFile() {
+		return this.fileobject;
+	}
+	public void setFile(File f) {
+		this.fileobject = f;
+	}
+	
+	public String getRomName() {
+		return this.romName;
 	}
 }
