@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 public class OptionSelection extends PreferenceActivity {
 
 	public Button buttonSave, buttonReboot = null;
+	private RomObject currentRom;
+	private ArrayList<OptionObject> options;
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,8 +57,8 @@ public class OptionSelection extends PreferenceActivity {
 	    this.addButtons();
 	    
 	    /** get rom-object */
-	    RomObject currentRom = DataStore.currentRom;
-	    ArrayList<OptionObject> options = currentRom.getOptions();
+	    currentRom = DataStore.currentRom;
+	    options = currentRom.getOptions();
 	    
 	    ArrayList<PreferenceCategory> categories = new ArrayList<PreferenceCategory>();
 	    ArrayList<String> categorieNames = new ArrayList<String>(); 
@@ -154,7 +156,7 @@ public class OptionSelection extends PreferenceActivity {
 				OptionSelection.this.onClickHandler(v);
 			}
 		});
-//	    linearLayout.addView(buttonSave);
+	    linearLayout.addView(buttonSave);
 	    
 	    /** create button2 */
 	    this.buttonReboot = new Button(prefRoot.getContext());
@@ -175,7 +177,29 @@ public class OptionSelection extends PreferenceActivity {
 	public void onClickHandler(View v) {
 		
 		if(v==OptionSelection.this.buttonSave) {
-			Util.alert(v.getContext(), "Nicht implementiert!");
+			String parameter = "";
+			for(int i=0; i<this.options.size(); i++) {
+				OptionObject option = this.options.get(i);
+				
+				if(option.getType().equals("checkbox")) {
+					CheckBoxPreference pref = (CheckBoxPreference)option.getPreference();
+					
+					if(pref.isChecked()) {
+						parameter+="-"+option.getValue();
+					}
+				}
+				else if(option.getType().equals("list")) {
+					ListPreference pref = (ListPreference)option.getPreference();
+					
+					if(pref.getValue().length()>0) {
+						parameter+="-"+pref.getValue();
+					}
+					Logger.debug(pref.getValue());
+				}
+				
+			}
+			Logger.debug(parameter);
+			Util.alert(this, parameter);
 		}
 		
 		else if(v==OptionSelection.this.buttonReboot) {
