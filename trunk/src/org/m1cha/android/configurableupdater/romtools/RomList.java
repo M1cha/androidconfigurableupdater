@@ -37,7 +37,10 @@ public class RomList {
 		/** loop through files in folder */
 		String[] fileList = sdcard.list();
 		for(int i=0; i<fileList.length; i++) {
-			String fileName = fileList[i]; 
+			String fileName = fileList[i];
+			if(fileName.length()<4) {
+				continue;
+			}
 			String ext = fileName.substring(fileName.length()-4, fileName.length());
 			
 			if(ext.equals(".zip")) {
@@ -45,6 +48,7 @@ public class RomList {
 				try {
 					/** open zip-file */
 					ZipFile zipFile = new ZipFile(this.sdcard.getAbsolutePath()+"/"+fileName);
+					Logger.debug("opened zip-File");
 					
 					/** get infofile */
 					ZipEntry entry = zipFile.getEntry("version");
@@ -57,10 +61,11 @@ public class RomList {
 					
 					/** get content of updater-file */
 					String updaterFile = Util.getEntryContentAsString(zipFile, entry);
+					Logger.debug("got updater-file");
 					
 					/** parse romObject from json-File */
 					RomObject romObject = new RomObject(updaterFile, fileName);
-					
+					Logger.debug("parsed jsonFile to RomObject");
 					
 					/** convert and save cover */
 					if(zipFile.getEntry(romObject.getCoverFilename())!=null) {
@@ -68,6 +73,7 @@ public class RomList {
 						InputStream is = zipFile.getInputStream(coverEntry);
 						romObject.setCover(BitmapFactory.decodeStream(is));
 					}
+					Logger.debug("tried to load cover");
 					
 					/** close zip-file */
 					zipFile.close();
@@ -78,13 +84,13 @@ public class RomList {
 				
 				/** exceptions */
 				catch (IOException e) {
-					Logger.debug("File '"+fileName+"' could not be opened as ZIP-archive.");
+					Logger.debug("File '"+fileName+"' could not be opened as ZIP-archive.", e);
 				} catch (Long2IntegerException e) {
-					Logger.debug("File '"+fileName+"' has a version-file which is too big.");
+					Logger.debug("File '"+fileName+"' has a version-file which is too big.", e);
 				} catch (JSONException e) {
-					Logger.debug("File '"+fileName+"' has an error in it's version-file.");
+					Logger.debug("File '"+fileName+"' has an error in it's version-file.", e);
 				} catch (NullPointerException e) {
-					Logger.debug("File '"+fileName+"' has an error in it's version-file.");
+					Logger.debug("File '"+fileName+"' has an error in it's version-file.", e);
 				}
 			}
 		}
