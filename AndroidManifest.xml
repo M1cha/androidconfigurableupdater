@@ -14,6 +14,7 @@
             </intent-filter>
         </activity>
         <activity android:name="OptionSelection"></activity>
+        <activity android:name="MainPreferenceActivity"></activity>
 
     </application>
 </manifest>

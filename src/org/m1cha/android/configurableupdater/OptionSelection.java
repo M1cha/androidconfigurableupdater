@@ -4,13 +4,16 @@ import java.util.ArrayList;
 
 import org.m1cha.android.configurableupdater.romtools.OptionObject;
 import org.m1cha.android.configurableupdater.romtools.RomObject;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -20,23 +23,24 @@ public class OptionSelection extends PreferenceActivity {
 
 	public Button buttonSave, buttonReboot = null;
 	
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		MenuInflater inflater = getMenuInflater();
-//		inflater.inflate(R.menu.menu_main, menu);
-//		return true;
-//	}
-//
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch(item.getItemId()) {
-//			case R.id.menuMain_itemExit:
-//				System.exit(1);
-//			break;
-//		}
-//		
-//		return true;
-//	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_main, menu);
+		return true;
+	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	switch(item.getItemId()) {
+    		case R.id.menuMain_itemSettings:
+    			Intent i = new Intent(this, MainPreferenceActivity.class);
+    			startActivity(i);
+    		break;
+    	}
+    	
+    	return super.onOptionsItemSelected(item);
+    }
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -83,6 +87,7 @@ public class OptionSelection extends PreferenceActivity {
 	    		
 	    		/** create preference */
 	    		CheckBoxPreference p = new CheckBoxPreference(this);
+	    		option.setPreference(p);
 	    		
 	    		/** set DisplayName */
 	    		p.setTitle(option.getDisplayName());
@@ -107,6 +112,7 @@ public class OptionSelection extends PreferenceActivity {
 	    		
 	    		/** create preference */
 	    		ListPreference p = new ListPreference(this);
+	    		option.setPreference(p);
 	    		
 	    		/** set DisplayName */
 	    		p.setTitle(option.getDisplayName());
@@ -148,7 +154,7 @@ public class OptionSelection extends PreferenceActivity {
 				OptionSelection.this.onClickHandler(v);
 			}
 		});
-	    linearLayout.addView(buttonSave);
+//	    linearLayout.addView(buttonSave);
 	    
 	    /** create button2 */
 	    this.buttonReboot = new Button(prefRoot.getContext());

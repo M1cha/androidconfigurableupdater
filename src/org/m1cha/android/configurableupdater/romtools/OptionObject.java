@@ -1,5 +1,7 @@
 package org.m1cha.android.configurableupdater.romtools;
 
+import android.preference.Preference;
+
 public class OptionObject {
 	private String category;
 	private String displayname;
@@ -9,6 +11,7 @@ public class OptionObject {
 	private String[] items;
 	private String[] values;
 	private String value;
+	private Preference preference;
 	
 	/** CATEGORY */
 	public String getCategory() {
@@ -72,5 +75,13 @@ public class OptionObject {
 	}
 	public void setValue(String s) {
 		this.value = s;
+	}
+	
+	/** PREFERENCE */
+	public Preference getPreference() {
+		return this.preference;
+	}
+	public void setPreference(Preference p) {
+		this.preference = p;
 	}
 }
