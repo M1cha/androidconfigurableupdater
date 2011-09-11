@@ -117,6 +117,21 @@ public class MainActivity extends Activity {
 			    /** start */
 			    startActivity(Intent.createChooser(sendIntent, getString(R.string.lang_menuMain_itemFeedSubject)));
     		break;
+    		
+    		case R.id.menuMain_itemAbout:
+    			/** load about-text */
+		    	String text = "";
+		    	try {
+		    		InputStream stream = getResources().openRawResource(R.raw.about);
+					text = Util.getStreamData(stream);
+				} catch (IOException e) {
+					Util.alert(this, getString(R.string.lang_error_uncaughtException));
+				}
+		    	
+		    	/** show popup */
+				Util.showPopup(this, getString(R.string.lang_romChangelog_title), text);
+    			
+    		break;
     	}
     	
     	return super.onOptionsItemSelected(item);
