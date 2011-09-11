@@ -24,17 +24,17 @@
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content"  
           android:gravity="bottom">
-	       <Button 
-	          android:text="@string/lang_intro_buttonNext" 
-	          android:id="@+id/intro_buttonNext" 
+	        <Button 
+	          android:text="@string/lang_intro_buttonManual" 
+	          android:id="@+id/intro_buttonManual" 
 	          android:layout_width="fill_parent" 
 	          android:layout_height="wrap_content" 
 	          android:layout_weight="1"
 	          android:onClick="onClickHandler">
 	        </Button>
 	        <Button 
-	          android:text="@string/lang_intro_buttonManual" 
-	          android:id="@+id/intro_buttonManual" 
+	          android:text="@string/lang_intro_buttonNext" 
+	          android:id="@+id/intro_buttonNext" 
 	          android:layout_width="fill_parent" 
 	          android:layout_height="wrap_content" 
 	          android:layout_weight="1"
