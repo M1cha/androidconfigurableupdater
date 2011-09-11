@@ -48,7 +48,7 @@ public class Util {
         if (is != null) {
             Writer writer = new StringWriter();
 
-            char[] buffer = new char[65536];
+            char[] buffer = new char[is.available()];
             try {
                 Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
                 int n;
