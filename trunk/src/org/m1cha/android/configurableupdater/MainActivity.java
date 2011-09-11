@@ -10,20 +10,25 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.ViewFlipper;
 
 public class MainActivity extends Activity {
 	
-	private int currentView = R.layout.intro;
+	private int currentView;
 	public RomList romList;
 	private String[] romNames;
 	private Spinner spinner_roms;
@@ -31,6 +36,9 @@ public class MainActivity extends Activity {
 	private SharedPreferences preferences;
 	private static String romFolder;
 	private static MainActivity object;
+	LayoutInflater li;
+	ViewFlipper flipper;
+	View currentViewObject;
 	
     /** Called when the activity is first created. */
     @Override
@@ -53,8 +61,13 @@ public class MainActivity extends Activity {
         /** get rom-folder */
         MainActivity.romFolder = preferences.getString("romfolder", getString(R.string.default_romFolder));
         
+        /** create and show flipper */
+        li = LayoutInflater.from(this);
+        flipper = new ViewFlipper(this);
+        setContentView(flipper);
+        
         /** show view */
-        showView(currentView);
+        showView(R.layout.intro, ANIM_DISABLED);
     }
     
     public static void setRomFolder(String s) {
@@ -67,6 +80,15 @@ public class MainActivity extends Activity {
     	outState.putInt("currentView", currentView);
     	super.onSaveInstanceState(outState);
     };
+    
+    /** 
+     * redirect this method to the current View 
+     * Otherwise it would go to the flipper
+     */
+    @Override
+    public View findViewById(int id) {
+    	return this.currentViewObject.findViewById(id);
+    };
 
     /** Needed for Back-Button-Handling */
     @Override
@@ -74,10 +96,10 @@ public class MainActivity extends Activity {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
         	switch(currentView) {
         		case R.layout.manual:
-        			showView(R.layout.intro);
+        			showView(R.layout.intro, ANIM_LEFT2RIGHT);
         		break;
         		case R.layout.rom_selection:
-        			showView(R.layout.intro);
+        			showView(R.layout.intro, ANIM_LEFT2RIGHT);
         		break;
         		default:
         			return super.onKeyDown(keyCode, event);
@@ -142,14 +164,14 @@ public class MainActivity extends Activity {
     	
     	switch(view.getId()) {
     		case R.id.intro_buttonManual:
-    			showView(R.layout.manual);
+    			showView(R.layout.manual, ANIM_RIGHT2LEFT);
     		break;
     		case R.id.intro_buttonNext:
-    			showView(R.layout.rom_selection);
+    			showView(R.layout.rom_selection, ANIM_RIGHT2LEFT);
     		break;
     		
     		case R.id.manual_buttonNext:
-    			showView(R.layout.rom_selection);
+    			showView(R.layout.rom_selection, ANIM_RIGHT2LEFT);
     		break;
     		
     		case R.id.rom_selection_buttonRoms:
@@ -167,12 +189,88 @@ public class MainActivity extends Activity {
     	}
     }
     
-    private void showView(int layoutID) {
-    	/** save, which view we are using now */
-    	currentView = layoutID;
+	private Animation inFromRightAnimation() {
+	
+		Animation inFromRight = new TranslateAnimation(
+			Animation.RELATIVE_TO_PARENT,  +1.0f, Animation.RELATIVE_TO_PARENT,  0.0f,
+			Animation.RELATIVE_TO_PARENT,  0.0f, Animation.RELATIVE_TO_PARENT,   0.0f
+		);
+		inFromRight.setDuration(200);
+		inFromRight.setInterpolator(new AccelerateInterpolator());
+		return inFromRight;
+	}
+	private Animation outToLeftAnimation() {
+		Animation outtoLeft = new TranslateAnimation(
+			Animation.RELATIVE_TO_PARENT,  0.0f, Animation.RELATIVE_TO_PARENT,  -1.0f,
+			Animation.RELATIVE_TO_PARENT,  0.0f, Animation.RELATIVE_TO_PARENT,   0.0f
+		);
+		outtoLeft.setDuration(200);
+		outtoLeft.setInterpolator(new AccelerateInterpolator());
+		return outtoLeft;
+	}
+	
+	private Animation inFromLeftAnimation() {
+		Animation inFromLeft = new TranslateAnimation(
+			Animation.RELATIVE_TO_PARENT,  -1.0f, Animation.RELATIVE_TO_PARENT,  0.0f,
+			Animation.RELATIVE_TO_PARENT,  0.0f, Animation.RELATIVE_TO_PARENT,   0.0f
+		);
+		inFromLeft.setDuration(200);
+		inFromLeft.setInterpolator(new AccelerateInterpolator());
+		return inFromLeft;
+	}
+	
+	private Animation outToRightAnimation() {
+		Animation outtoRight = new TranslateAnimation(
+			Animation.RELATIVE_TO_PARENT,  0.0f, Animation.RELATIVE_TO_PARENT,  +1.0f,
+			Animation.RELATIVE_TO_PARENT,  0.0f, Animation.RELATIVE_TO_PARENT,   0.0f
+		);
+		outtoRight.setDuration(200);
+		outtoRight.setInterpolator(new AccelerateInterpolator());
+		return outtoRight;
+	}
+	
+	private int ANIM_DISABLED = 0;
+    private int ANIM_LEFT2RIGHT = 1;
+    private int ANIM_RIGHT2LEFT = 2;
+    private void showView(int layoutID, int direction) {
+       
+		/** load new view */
+    	View newView = li.inflate(layoutID, null);
     	
-    	/** show the new view */
-    	setContentView(layoutID);
+    	/** if new view is already the actual one do nothing */
+    	if(layoutID!=currentView) {
+    		
+    		/** add new view */
+			flipper.addView(newView);
+			   
+			/** show new view */
+			if(direction==ANIM_DISABLED) {
+				flipper.setInAnimation(null);
+				flipper.setOutAnimation(null);
+				flipper.setDisplayedChild(0);
+			}
+			else {
+				if(direction==ANIM_RIGHT2LEFT) {
+					flipper.setInAnimation(inFromRightAnimation());
+					flipper.setOutAnimation(outToLeftAnimation());
+				}
+				else if(direction==ANIM_LEFT2RIGHT) {
+					flipper.setInAnimation(inFromLeftAnimation());
+					flipper.setOutAnimation(outToRightAnimation());
+				}
+				flipper.showNext();
+			}
+	   
+			/** delete old view if there is one */
+			if(flipper.getChildCount()>1) {
+				/** remove old view */
+				flipper.removeView(li.inflate(currentView, null));
+			}
+			
+			/** save, which view we are using now */
+	    	currentView = layoutID;
+	    	currentViewObject = newView;
+    	}
     	
     	/** set layout's title */
     	String title = Util.getTitleByLayoutId(this, layoutID);
@@ -190,7 +288,7 @@ public class MainActivity extends Activity {
     }
     
     public static void reloadRomSelection() {
-    	object.showView(R.layout.rom_selection);
+    	object.showView(R.layout.rom_selection, object.ANIM_DISABLED);
     }
 
 	private void showManual() {
