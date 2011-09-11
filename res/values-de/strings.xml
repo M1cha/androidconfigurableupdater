@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AndroidConfigurableUpdater</string>
+    <string name="app_name">MIUI PE Configer</string>
     <string name="lang_intro_buttonManual">Anleitung</string>
     <string name="lang_manual_buttonNext">Weiter</string>
     <string name="lang_manual_title">Anleitung</string>
