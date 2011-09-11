@@ -1,6 +1,7 @@
 package org.m1cha.android.configurableupdater.romtools;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,8 +18,14 @@ public class RomObject {
 	private String changelog;
 	private String coverFilename;
 	private Bitmap coverBitmap;
+	private Pattern p = Pattern.compile("[-]+");
 	
 	public RomObject(String updaterFile, String filename) throws JSONException, NullPointerException {
+		
+		/** get options defined in filename */
+		String fileNameWithOutExtension = filename.substring(0, filename.length()-4);
+		String[] romNameOptions = p.split(fileNameWithOutExtension);
+	
 		/** parse JSON-String */
 		JSONObject updater = new JSONObject(updaterFile);
 		Logger.debug("[RomObject] parsed json-string");
@@ -90,10 +97,26 @@ public class RomObject {
 				Logger.debug("[RomObject:"+j+"|List] saved items");
 				option.setValues(values);
 				Logger.debug("[RomObject:"+j+"|List] saved values");
+				
+				/** overwrite json-default with filename-options */
+				for(int i=1; i<romNameOptions.length; i++) {
+					for(int z=0; z<values.length; z++) {
+						if(values[z].equals(romNameOptions[i])) {
+							option.setDefaultValue(z);
+						}
+					}
+				}
 			}
 			else {
 				option.setValue(jsonOption.getString("value"));
 				Logger.debug("[RomObject:"+j+"|Checkbox] got value");
+				
+				/** overwrite json-default with filename-options */
+				for(int i=1; i<romNameOptions.length; i++) {
+					if(romNameOptions[i].equals(option.getValue())) {
+						option.setDefaultValue(1);
+					}
+				}
 			}
 			
 			/** add option-object to arraylist */

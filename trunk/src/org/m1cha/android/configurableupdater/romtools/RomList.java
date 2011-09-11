@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.json.JSONException;
@@ -20,6 +21,7 @@ public class RomList {
 	private File sdcard;
 	private ArrayList<RomObject> romList = new ArrayList<RomObject>();
 	private Context context;
+	private Pattern p = Pattern.compile("[-]+");
 	
 	public RomList(Context context, String path) {
 		/** save context */
@@ -100,11 +102,24 @@ public class RomList {
 		String[] names = new String[this.romList.size()];
 		
 		for(int i=0; i<this.romList.size(); i++) {
+			
+			/** filename */
 			String fileName = this.romList.get(i).getFilename();
-			names[i] = fileName.substring(0, fileName.length()-4)+"("+this.romList.get(i).getVersion()+")";
+			
+			/** remove extension */
+			fileName = fileName.substring(0, fileName.length()-4);
+			
+			/** split at '-' */
+			String[] romName = p.split(fileName, 2);
+			
+			names[i] = romName[0]+"("+this.romList.get(i).getVersion()+")";
 		}
 		
 		return names;
+	}
+	
+	public void applyRomNameOptions() {
+		
 	}
 	
 	public RomObject getRom(int i) {
