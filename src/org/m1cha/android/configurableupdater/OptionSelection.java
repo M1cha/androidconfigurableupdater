@@ -71,7 +71,7 @@ public class OptionSelection extends PreferenceActivity {
     			}
     	    	
     	    	/** show popup */
-    			Util.showPopup(this, getString(R.string.lang_romChangelog_title), text);
+    			Util.showPopup(this, getString(R.string.lang_menuMain_itemAbout), text);
     			
     		break;
     	};
