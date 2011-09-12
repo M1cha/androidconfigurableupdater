@@ -13,6 +13,7 @@ import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -77,6 +78,17 @@ public class OptionSelection extends PreferenceActivity {
     	};
     	
     	return super.onOptionsItemSelected(item);
+    }
+	
+
+    /** Needed for Back-Button-Handling */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+        	MainActivity.reloadRomSelection();
+        }
+    
+    	return super.onKeyDown(keyCode, event);
     }
 	
 	/** Called when the activity is first created. */
@@ -260,9 +272,8 @@ public class OptionSelection extends PreferenceActivity {
 			/** rename file */
 			this.currentRom.getFile().renameTo(newFile);
 			
-			/** reload romSelection and exit */
-			MainActivity.reloadRomSelection();
-			finish();
+			/** show message */
+			Util.alert(this, getString(R.string.lang_menuMain_msgRestore));
 		}
 		
 		else if(v==OptionSelection.this.buttonReboot) {
