@@ -96,6 +96,9 @@ public class OptionSelection extends PreferenceActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    
+	    /** set title */
+	    setTitle(R.string.lang_optionSelection_title);
+	    
 	    /** load preference-xml */
 	    addPreferencesFromResource(R.xml.pref_option_selection);
 	    PreferenceScreen main = ((PreferenceScreen)findPreference("PREFSMAIN"));
