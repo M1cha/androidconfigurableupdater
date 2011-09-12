@@ -16,7 +16,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -182,5 +184,46 @@ public class Util {
     	
     	/** show dialog */
     	popup.show();
+    }
+    
+    public static void menuHandler(Context context, MenuItem item) {
+    	switch(item.getItemId()) {
+			case R.id.menuMain_itemSettings:
+				Intent i = new Intent(context, MainPreferenceActivity.class);
+				context.startActivity(i);
+			break;
+			
+			case R.id.menuMain_itemFeedback:
+				/** receiver */
+				String[] mailto = { "m1cha-dev@web.de" };
+				
+			    /** create intent */
+			    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+			    
+			    /** set attributes */
+			    sendIntent.putExtra(Intent.EXTRA_EMAIL, mailto);
+			    sendIntent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.lang_menuMain_itemFeedSubject));
+			    sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+			    sendIntent.setType("text/plain");
+			    
+			    /** start */
+			    context.startActivity(Intent.createChooser(sendIntent, context.getString(R.string.lang_menuMain_itemFeedSubject)));
+			break;
+			
+			case R.id.menuMain_itemAbout:
+				/** load about-text */
+		    	String text = "";
+		    	try {
+		    		InputStream stream = context.getResources().openRawResource(R.raw.about);
+					text = Util.getStreamData(stream);
+				} catch (IOException e) {
+					Util.alert(context, context.getString(R.string.lang_error_uncaughtException));
+				}
+		    	
+		    	/** show popup */
+				Util.showPopup(context, context.getString(R.string.lang_menuMain_itemAbout), text);
+				
+			break;
+		}
     }
 }

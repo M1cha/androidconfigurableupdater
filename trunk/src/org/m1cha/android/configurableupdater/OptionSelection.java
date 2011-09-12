@@ -2,13 +2,11 @@ package org.m1cha.android.configurableupdater;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import org.m1cha.android.configurableupdater.romtools.OptionObject;
 import org.m1cha.android.configurableupdater.romtools.RomObject;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -39,46 +37,7 @@ public class OptionSelection extends PreferenceActivity {
 	
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-		
-    	switch(item.getItemId()) {
-    		case R.id.menuMain_itemSettings:
-    			Intent i = new Intent(this, MainPreferenceActivity.class);
-    			startActivity(i);
-    		break;
-    		
-    		case R.id.menuMain_itemFeedback:
-    			/** receiver */
-    			String[] mailto = { "m1cha-dev@web.de" };
-    			
-    		    /** create intent */
-    		    Intent sendIntent = new Intent(Intent.ACTION_SEND);
-    		    
-    		    /** set attributes */
-    		    sendIntent.putExtra(Intent.EXTRA_EMAIL, mailto);
-    		    sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.lang_menuMain_itemFeedSubject));
-    		    sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-    		    sendIntent.setType("text/plain");
-    		    
-    		    /** start */
-    		    startActivity(Intent.createChooser(sendIntent, getString(R.string.lang_menuMain_itemFeedSubject)));
-    		break;
-    		
-    		case R.id.menuMain_itemAbout:
-    			/** load about-text */
-    	    	String text = "";
-    	    	try {
-    	    		InputStream stream = getResources().openRawResource(R.raw.about);
-    				text = Util.getStreamData(stream);
-    			} catch (IOException e) {
-    				Util.alert(this, getString(R.string.lang_error_uncaughtException));
-    			}
-    	    	
-    	    	/** show popup */
-    			Util.showPopup(this, getString(R.string.lang_menuMain_itemAbout), text);
-    			
-    		break;
-    	};
-    	
+		Util.menuHandler(this, item);
     	return super.onOptionsItemSelected(item);
     }
 	
