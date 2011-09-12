@@ -30,4 +30,7 @@
     <string name="lang_popup_buttonClose">Close</string>
     <string name="lang_romChangelog_title">Changelog</string>
     <string name="default_romFolder">miuiupdater</string>
+    <string name="lang_alert_buttonOk">OK</string>
+    <string name="lang_alert_buttonCancel">Cancel</string>
+    <string name="lang_alert_rebootText">This will reboot into recovery.</string>
 </resources>
