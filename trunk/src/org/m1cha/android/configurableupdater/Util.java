@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,11 +43,15 @@ public class Util {
     }
     
     public static void alertOkCancel(Context context, String text, DialogInterface.OnClickListener listener) {
+        Util.alertCustom(context, text, R.string.lang_alert_buttonOk, R.string.lang_alert_buttonCancel, listener);
+    }
+    
+    public static void alertCustom(Context context, String text, int posButtonTextId, int negButtonTextId, DialogInterface.OnClickListener listener) {
     	android.app.AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(text);
         builder.setCancelable(true);
-        builder.setPositiveButton(R.string.lang_alert_buttonOk, listener);
-        builder.setNegativeButton(R.string.lang_alert_buttonCancel, listener);
+        builder.setPositiveButton(posButtonTextId, listener);
+        builder.setNegativeButton(negButtonTextId, listener);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -186,6 +191,7 @@ public class Util {
     	popup.show();
     }
     
+    private static Context contextFeedback;
     public static void menuHandler(Context context, MenuItem item) {
     	switch(item.getItemId()) {
 			case R.id.menuMain_itemSettings:
@@ -194,20 +200,43 @@ public class Util {
 			break;
 			
 			case R.id.menuMain_itemFeedback:
-				/** receiver */
-				String[] mailto = { "m1cha-dev@web.de" };
 				
-			    /** create intent */
-			    Intent sendIntent = new Intent(Intent.ACTION_SEND);
-			    
-			    /** set attributes */
-			    sendIntent.putExtra(Intent.EXTRA_EMAIL, mailto);
-			    sendIntent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.lang_menuMain_itemFeedSubject));
-			    sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-			    sendIntent.setType("text/plain");
-			    
-			    /** start */
-			    context.startActivity(Intent.createChooser(sendIntent, context.getString(R.string.lang_menuMain_itemFeedSubject)));
+				/** save context for onclickhandler */
+				contextFeedback = context;
+				
+				/** show message */
+				Util.alertCustom(context, context.getString(R.string.lang_alert_FeedbackText), R.string.lang_alert_buttonIssue, R.string.lang_alert_buttonFeedback, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch(which) {
+
+							/** issue */
+							case DialogInterface.BUTTON_POSITIVE:
+								Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://code.google.com/p/androidconfigurableupdater/issues/list"));
+								contextFeedback.startActivity(browserIntent);
+							break;
+							
+							/** feedback */
+							case DialogInterface.BUTTON_NEGATIVE:
+								/** receiver */
+								String[] mailto = { "m1cha-dev@web.de" };
+								
+							    /** create intent */
+							    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+							    
+							    /** set attributes */
+							    sendIntent.putExtra(Intent.EXTRA_EMAIL, mailto);
+							    sendIntent.putExtra(Intent.EXTRA_SUBJECT, contextFeedback.getString(R.string.lang_menuMain_itemFeedSubject));
+							    sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+							    sendIntent.setType("text/plain");
+							    
+							    /** start */
+							    contextFeedback.startActivity(Intent.createChooser(sendIntent, contextFeedback.getString(R.string.lang_menuMain_itemFeedSubject)));
+							break;
+						}
+					}
+				});
 			break;
 			
 			case R.id.menuMain_itemAbout:

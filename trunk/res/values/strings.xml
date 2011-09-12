@@ -33,4 +33,7 @@
     <string name="lang_alert_buttonOk">OK</string>
     <string name="lang_alert_buttonCancel">Cancel</string>
     <string name="lang_alert_rebootText">This will reboot into recovery.</string>
+    <string name="lang_alert_FeedbackText">If you want to report a bug please open a issue on our GoogleCode-Page.</string>
+    <string name="lang_alert_buttonIssue">Create Issue</string>
+    <string name="lang_alert_buttonFeedback">Give Feedback</string>
 </resources>
