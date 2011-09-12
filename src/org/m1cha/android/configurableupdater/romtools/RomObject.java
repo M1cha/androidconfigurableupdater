@@ -21,13 +21,26 @@ public class RomObject {
 	private String coverFilename;
 	private Bitmap coverBitmap;
 	private File fileobject;
+	private String kernelVersion;
 	private Pattern p = Pattern.compile("[-]+");
 	
 	public RomObject(String updaterFile, String filename) throws JSONException, NullPointerException {
 		
-		/** get options defined in filename */
+		/** prepare filename */
 		String fileNameWithOutExtension = filename.substring(0, filename.length()-4);
-		String[] romNameOptions = p.split(fileNameWithOutExtension);
+		
+		/** get kernel-version */
+		String[] kernelVersionSplit = p.split(fileNameWithOutExtension, 3);
+		this.kernelVersion = kernelVersionSplit[1];
+		for(int i=0; i<kernelVersionSplit.length; i++) {
+			Logger.debug("kernelVersionSplit["+i+"] : "+kernelVersionSplit[i]);
+		}
+		
+		/** get options defined in filename */
+		String[] romNameOptions = p.split(kernelVersionSplit[2]);
+		for(int i=0; i<romNameOptions.length; i++) {
+			Logger.debug("romNameOptions["+i+"] : "+romNameOptions[i]);
+		}
 	
 		/** parse JSON-String */
 		JSONObject updater = new JSONObject(updaterFile);
@@ -105,7 +118,7 @@ public class RomObject {
 				Logger.debug("[RomObject:"+j+"|List] saved values");
 				
 				/** overwrite json-default with filename-options */
-				for(int i=1; i<romNameOptions.length; i++) {
+				for(int i=0; i<romNameOptions.length; i++) {
 					boolean found=false;
 					for(int z=0; z<values.length; z++) {
 						if(values[z].equals(romNameOptions[i])) {
@@ -122,7 +135,7 @@ public class RomObject {
 				Logger.debug("[RomObject:"+j+"|Checkbox] got value");
 				
 				/** overwrite json-default with filename-options */
-				for(int i=1; i<romNameOptions.length; i++) {
+				for(int i=0; i<romNameOptions.length; i++) {
 					if(romNameOptions[i].equals(option.getValue())) {
 						option.setDefaultValue(1);
 						break;
@@ -174,5 +187,8 @@ public class RomObject {
 	
 	public String getRomName() {
 		return this.romName;
+	}
+	public String getKernelVersion() {
+		return this.kernelVersion;
 	}
 }
