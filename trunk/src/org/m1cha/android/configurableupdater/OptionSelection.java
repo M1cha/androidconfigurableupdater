@@ -3,9 +3,11 @@ package org.m1cha.android.configurableupdater;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import org.m1cha.android.configurableupdater.romtools.OptionObject;
 import org.m1cha.android.configurableupdater.romtools.RomObject;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -280,7 +282,32 @@ public class OptionSelection extends PreferenceActivity {
 		}
 		
 		else if(v==OptionSelection.this.buttonReboot) {
-			Util.alert(this, "Not implemented!");
+			Util.alertOkCancel(this, getString(R.string.lang_alert_rebootText), new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					switch(which) {
+
+						case DialogInterface.BUTTON_POSITIVE:
+							Process p;
+							try {
+								/** gain superuser shell */
+								p = Runtime.getRuntime().exec("su");
+								OutputStream os = p.getOutputStream();
+								
+								/** set bootmode to recovery */
+								os.write("mkdir -p /cache/recovery/\n".getBytes());
+					            os.write("echo 'recovery' >/cache/recovery/bootmode.conf\n".getBytes());
+					            
+					            /** reboot */
+					            os.write("reboot\n".getBytes());
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						break;
+					}
+				}
+			});
 		}
 	}
 }

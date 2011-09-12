@@ -15,6 +15,7 @@ import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerExcept
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,17 @@ public class Util {
     	android.app.AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(text);
         builder.setCancelable(true);
-        builder.setPositiveButton("OK", null);
+        builder.setPositiveButton(R.string.lang_alert_buttonOk, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    
+    public static void alertOkCancel(Context context, String text, DialogInterface.OnClickListener listener) {
+    	android.app.AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(text);
+        builder.setCancelable(true);
+        builder.setPositiveButton(R.string.lang_alert_buttonOk, listener);
+        builder.setNegativeButton(R.string.lang_alert_buttonCancel, listener);
         AlertDialog dialog = builder.create();
         dialog.show();
     }

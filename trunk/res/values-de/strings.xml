@@ -29,4 +29,7 @@
     <string name="lang_optionSelection_buttonReboot">Reboot</string>
     <string name="lang_popup_buttonClose">Schließen</string>
     <string name="lang_romChangelog_title">Changelog</string>
+    <string name="lang_alert_buttonOk">OK</string>
+    <string name="lang_alert_buttonCancel">Abbrechen</string>
+    <string name="lang_alert_rebootText">Es wird ins Recovery gestartet.</string>
 </resources>
