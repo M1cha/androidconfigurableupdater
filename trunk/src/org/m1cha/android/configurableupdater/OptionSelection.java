@@ -235,6 +235,7 @@ public class OptionSelection extends PreferenceActivity {
 			
 			/** rename file */
 			this.currentRom.getFile().renameTo(newFile);
+			this.currentRom.setFile(newFile);
 			
 			/** show message */
 			Util.alert(this, getString(R.string.lang_menuMain_msgRestore));
