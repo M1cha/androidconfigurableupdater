@@ -213,7 +213,7 @@ public class OptionSelection extends PreferenceActivity {
 			}
 			
 			/** create new file-object */
-			File newFile = new File(this.currentRom.getFile().getParent(), this.currentRom.getRomName()+parameter+".zip");
+			File newFile = new File(this.currentRom.getFile().getParent(), this.currentRom.getRomName()+"-"+this.currentRom.getKernelVersion()+parameter+".zip");
 			
 			/** check if anything was changed */
 			if(newFile.getName().equals(this.currentRom.getFile().getName())) {

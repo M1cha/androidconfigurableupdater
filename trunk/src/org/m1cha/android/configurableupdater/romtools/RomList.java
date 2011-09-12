@@ -92,9 +92,11 @@ public class RomList {
 				} catch (Long2IntegerException e) {
 					Logger.debug("File '"+fileName+"' has a version-file which is too big.", e);
 				} catch (JSONException e) {
-					Logger.debug("File '"+fileName+"' has an error in it's version-file.", e);
+					Logger.debug("File '"+fileName+"' has an error in it's version-file:JSON", e);
 				} catch (NullPointerException e) {
-					Logger.debug("File '"+fileName+"' has an error in it's version-file.", e);
+					Logger.debug("File '"+fileName+"' has an error in it's version-file:NullPointer", e);
+				} catch (ArrayIndexOutOfBoundsException e) {
+					Logger.debug("File '"+fileName+"' has an error in it's version-file:noKernelVersion", e);
 				}
 			}
 		}
