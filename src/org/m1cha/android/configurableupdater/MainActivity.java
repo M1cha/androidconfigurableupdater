@@ -36,9 +36,10 @@ public class MainActivity extends Activity {
 	private SharedPreferences preferences;
 	private static String romFolder;
 	private static MainActivity object;
-	LayoutInflater li;
-	ViewFlipper flipper;
-	View currentViewObject;
+	private LayoutInflater li;
+	private ViewFlipper flipper;
+	private View currentViewObject;
+	private boolean cameFromManual = false;
 	
     /** Called when the activity is first created. */
     @Override
@@ -99,7 +100,12 @@ public class MainActivity extends Activity {
         			showView(R.layout.intro, ANIM_LEFT2RIGHT);
         		break;
         		case R.layout.rom_selection:
-        			showView(R.layout.intro, ANIM_LEFT2RIGHT);
+        			if(this.cameFromManual) {
+        				showView(R.layout.manual, ANIM_LEFT2RIGHT);
+        			}
+        			else {
+        				showView(R.layout.intro, ANIM_LEFT2RIGHT);
+        			}
         		break;
         		default:
         			return super.onKeyDown(keyCode, event);
@@ -167,10 +173,12 @@ public class MainActivity extends Activity {
     			showView(R.layout.manual, ANIM_RIGHT2LEFT);
     		break;
     		case R.id.intro_buttonNext:
+    			this.cameFromManual = false;
     			showView(R.layout.rom_selection, ANIM_RIGHT2LEFT);
     		break;
     		
     		case R.id.manual_buttonNext:
+    			this.cameFromManual = true;
     			showView(R.layout.rom_selection, ANIM_RIGHT2LEFT);
     		break;
     		
