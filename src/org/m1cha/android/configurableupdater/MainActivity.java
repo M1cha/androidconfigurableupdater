@@ -51,9 +51,12 @@ public class MainActivity extends Activity {
          */
         object = this;
         
+        /** set intro as first view */
+        int firstViewId = R.layout.intro;
+        
         /** restore saved instance */
         if(savedInstanceState!=null) {
-        	currentView = savedInstanceState.getInt("currentView");
+        	firstViewId = savedInstanceState.getInt("currentView");
         }
         
         /** shared preferences */
@@ -68,7 +71,7 @@ public class MainActivity extends Activity {
         setContentView(flipper);
         
         /** show view */
-        showView(R.layout.intro, ANIM_DISABLED);
+        showView(firstViewId, ANIM_DISABLED);
     }
     
     public static void setRomFolder(String s) {

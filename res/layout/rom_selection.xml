@@ -20,13 +20,7 @@
              android:layout_height="50dip"
              android:text="@string/lang_rom_selection_buttonRoms"
              android:gravity="left|center_vertical"
-             android:drawableRight="@android:drawable/arrow_down_float">
-           </Spinner>
-           <Spinner 
-             android:layout_height="0pt" 
-             android:id="@+id/rom_selection_spinner" 
-             android:layout_width="0pt" 
-             android:layout_weight="0">
+             android:layout_marginTop="5dip">
            </Spinner>
         </LinearLayout>
         
