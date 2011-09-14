@@ -13,7 +13,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -274,11 +273,29 @@ public class MainActivity extends Activity {
     }
 
 	private void showManual() {
+		
+		/** get manual */
+        File manualFile = Util.getCustomFile("manual.html");
+        
     	/** load manual */
     	String text = "";
     	try {
-    		InputStream stream = getResources().openRawResource(R.raw.manual);
-			text = Util.getStreamData(stream);
+    		
+    		/** load custom manual-file if avaible */
+    		if(manualFile.canRead()) {
+    			try {
+    				FileInputStream is = new FileInputStream(manualFile);
+    				text = Util.getStreamData(is);
+    			} catch (FileNotFoundException e) {
+    				Logger.debug("custom manual-file not found", e);
+    			}
+            }
+    		
+    		/** else load internal manual-file */
+    		else {
+    			InputStream stream = getResources().openRawResource(R.raw.manual);
+    			text = Util.getStreamData(stream);
+    		}
 		} catch (IOException e) {
 			Util.alert(this, getString(R.string.lang_error_loadManual));
 		}
@@ -315,15 +332,9 @@ public class MainActivity extends Activity {
 	}
 	
 	private void showIntro() {
-		/** get root-directory */
-		File root = Environment.getRootDirectory();
-        if(!root.canRead()) {
-        	Logger.debug("error reading root-directory");
-        	return;
-        }
-        
-        /** get image */
-        File introPicture = new File(root.getAbsolutePath()+"/androidconfigurableupdater/intro.png");
+		
+        /** get custom intro-image if avaible */
+        File introPicture = Util.getCustomFile("intro.png");
         if(!introPicture.canRead()) {
         	Logger.debug("cannot read custom intro-image");
         	return;

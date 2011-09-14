@@ -2,6 +2,8 @@ package org.m1cha.android.configurableupdater;
 
 import java.io.BufferedReader;
 import android.view.View.OnClickListener;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,6 +11,7 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
+import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
@@ -19,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Environment;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -254,5 +258,24 @@ public class Util {
 				
 			break;
 		}
+    }
+    
+    private static String CUSTOMFILESPATH = "androidconfigurableupdater/";
+    public static File getCustomFile(String filepath) {
+    	
+    	/** get language-code */
+    	String langCode = Locale.getDefault().getLanguage();
+    	if(langCode.length()>0) {
+    		langCode = "-"+langCode;
+    	}
+    	
+    	/** get root-directory */
+		File root = Environment.getRootDirectory();
+    	
+    	/** get object for new file */
+    	File customFile = new File(root.getAbsolutePath()+"/"+CUSTOMFILESPATH+"raw"+langCode+"/"+filepath);
+    	
+    	/** return */
+    	return customFile;
     }
 }
