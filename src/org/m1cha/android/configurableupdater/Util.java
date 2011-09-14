@@ -275,6 +275,11 @@ public class Util {
     	/** get object for new file */
     	File customFile = new File(root.getAbsolutePath()+"/"+CUSTOMFILESPATH+"raw"+langCode+"/"+filepath);
     	
+    	/** load default-folder if the localized cannot be loaded */
+    	if(!customFile.canRead()) {
+    		customFile = new File(root.getAbsolutePath()+"/"+CUSTOMFILESPATH+"raw/"+filepath);
+    	}
+    	
     	/** return */
     	return customFile;
     }
