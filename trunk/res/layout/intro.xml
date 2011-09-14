@@ -16,7 +16,8 @@
           android:layout_weight="1">
             <ImageView android:src="@drawable/intro"
               android:layout_width="match_parent" 
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:id="@+id/intro_image">
             </ImageView>
         </LinearLayout>
         

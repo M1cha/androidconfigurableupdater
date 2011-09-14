@@ -1,13 +1,19 @@
 package org.m1cha.android.configurableupdater;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import org.m1cha.android.configurableupdater.romtools.RomList;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -257,6 +263,9 @@ public class MainActivity extends Activity {
     	else if(layoutID==R.layout.rom_selection) {
     		showRomSelection();
     	}
+    	else if(layoutID==R.layout.intro) {
+    		showIntro();
+    	}
     	
     }
     
@@ -303,6 +312,32 @@ public class MainActivity extends Activity {
 			public void onNothingSelected(AdapterView<?> arg0) {
 			}
 		});
+	}
+	
+	private void showIntro() {
+		/** get root-directory */
+		File root = Environment.getRootDirectory();
+        if(!root.canRead()) {
+        	Logger.debug("error reading root-directory");
+        	return;
+        }
+        
+        /** get image */
+        File introPicture = new File(root.getAbsolutePath()+"/androidconfigurableupdater/intro.png");
+        if(!introPicture.canRead()) {
+        	Logger.debug("cannot read custom intro-image");
+        	return;
+        }
+        
+        /** try to load and display image */
+        try {
+			FileInputStream is = new FileInputStream(introPicture);
+			Bitmap bm = BitmapFactory.decodeStream(is);
+			ImageView iv = (ImageView)findViewById(R.id.intro_image);
+			iv.setImageBitmap(bm);
+		} catch (FileNotFoundException e) {
+			Logger.debug("custom intro-image not found", e);
+		}
 	}
 	
 	public void RomSelection_setRom(int index) {
