@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MIUI PE Configer</string>
+    <string name="app_name">MIUI Flag Configer</string>
     <string name="lang_intro_buttonManual">Manual</string>
     <string name="lang_manual_buttonNext">Next</string>
     <string name="lang_manual_title">Manual</string>
