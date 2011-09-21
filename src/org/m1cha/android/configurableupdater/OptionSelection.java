@@ -1,8 +1,6 @@
 package org.m1cha.android.configurableupdater;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import org.m1cha.android.configurableupdater.romtools.OptionObject;
 import org.m1cha.android.configurableupdater.romtools.RomObject;
@@ -249,21 +247,7 @@ public class OptionSelection extends PreferenceActivity {
 					switch(which) {
 
 						case DialogInterface.BUTTON_POSITIVE:
-							Process p;
-							try {
-								/** gain superuser shell */
-								p = Runtime.getRuntime().exec("su");
-								OutputStream os = p.getOutputStream();
-								
-								/** set bootmode to recovery */
-								os.write("mkdir -p /cache/recovery/\n".getBytes());
-					            os.write("echo 'recovery' >/cache/recovery/bootmode.conf\n".getBytes());
-					            
-					            /** reboot */
-					            os.write("reboot\n".getBytes());
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
+							Util.rebootPhone();
 						break;
 					}
 				}
