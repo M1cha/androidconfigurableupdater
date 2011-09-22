@@ -73,7 +73,7 @@ public class MainPreferenceActivity extends PreferenceActivity {
 	private void reloadPrefScreen() {
 		
 		/** get new value */
-		String newValue = sharedPref.getString("romfolder", getString(R.string.default_romFolder));
+		String newValue = sharedPref.getString("romfolder", Util.getDefaultRomFolder());
 		
 		/** tell romFolder to MainActivity */
 		MainActivity.setRomFolder(newValue);
@@ -114,7 +114,7 @@ public class MainPreferenceActivity extends PreferenceActivity {
 	public void onClickHandler(View v) {
 		if(v==MainPreferenceActivity.this.buttonReset) {
 			/** set romfolder-value to default */
-			this.sharedPref.edit().putString("romfolder", getString(R.string.default_romFolder)).commit();
+			this.sharedPref.edit().putString("romfolder", Util.getDefaultRomFolder()).commit();
 			
 			/** show message */
 			Util.alert(this, getString(R.string.lang_menuMain_msgRestore));

@@ -315,4 +315,12 @@ public class Util {
 			e.printStackTrace();
 		}
     }
+    
+    private static String defaultRomFolder="";
+    public static void setDefaultRomFolder(String s) {
+    	defaultRomFolder = s;
+    }
+    public static String getDefaultRomFolder() {
+    	return defaultRomFolder;
+    }
 }
