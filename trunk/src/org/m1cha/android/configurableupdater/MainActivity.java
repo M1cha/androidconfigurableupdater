@@ -68,32 +68,11 @@ public class MainActivity extends Activity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         
         /** set default rom-folder */
-//        File customRomFolderFile = Util.getCustomFile("customRomFolder.txt");
-//        boolean customFolderSuccess = false;
-//        if(customRomFolderFile.canRead()) {
-//			try {
-//				/** get file content */
-//				String customDefaultRomFolder = Util.getStreamData(new FileInputStream(customRomFolderFile));
-//						
-//				/** set file-content as rom-folder */
-//				Util.setDefaultRomFolder(customDefaultRomFolder);
-//				
-//				/** set success-bool to true */
-//				Logger.debug("using custom default-romfolder: "+customDefaultRomFolder);
-//				customFolderSuccess=true;
-//			} catch (FileNotFoundException e) {
-//				Logger.debug("custom romfolder-file not found", e);
-//			} catch (IOException e) {
-//				Logger.debug("custom romfolder-file io-error", e);
-//			}
-//        	
-//        }
-        
-        
         if(android.os.Build.MODEL.equals("Optimus 2X")) {
         	Util.setDefaultRomFolder("_ExternalSD/"+getString(R.string.default_romFolder));
     	}
         else {
+        	Logger.debug("Executing on device: "+android.os.Build.MODEL);
         	Logger.debug("using internal default-romfolder");
         	Util.setDefaultRomFolder(getString(R.string.default_romFolder));
         }
@@ -108,7 +87,6 @@ public class MainActivity extends Activity {
         
         /** show view */
         showView(firstViewId, ANIM_DISABLED);
-        Util.alert(this, android.os.Build.MODEL);
     }
     
     public static void setRomFolder(String s) {
