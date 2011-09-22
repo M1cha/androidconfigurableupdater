@@ -88,7 +88,9 @@ public class MainActivity extends Activity {
 //			}
 //        	
 //        }
-        if(android.os.Build.MODEL.toUpperCase().equals("P990")) {
+        
+        
+        if(android.os.Build.MODEL.equals("Optimus 2X")) {
         	Util.setDefaultRomFolder("_ExternalSD/"+getString(R.string.default_romFolder));
     	}
         else {
@@ -106,6 +108,7 @@ public class MainActivity extends Activity {
         
         /** show view */
         showView(firstViewId, ANIM_DISABLED);
+        Util.alert(this, android.os.Build.MODEL);
     }
     
     public static void setRomFolder(String s) {
