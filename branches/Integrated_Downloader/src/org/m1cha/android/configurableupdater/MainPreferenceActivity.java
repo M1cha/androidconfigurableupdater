@@ -72,15 +72,15 @@ public class MainPreferenceActivity extends PreferenceActivity {
 	
 	private void reloadPrefScreen() {
 		
-		/** get new value */
-		String newValue = sharedPref.getString("romfolder", Util.getDefaultRomFolder());
-		
-		/** tell romFolder to MainActivity */
-		MainActivity.setRomFolder(newValue);
-		
-		/** re-render pref-screen */
-		getPreferenceScreen().removeAll();
-		addPreferencesFromResource(R.xml.pref_main_menu);
+//		/** get new value */
+//		String newValue = sharedPref.getString("romfolder", Util.getDefaultRomFolder());
+//		
+//		/** tell romFolder to MainActivity */
+//		MainActivity.setRomFolder(newValue);
+//		
+//		/** re-render pref-screen */
+//		getPreferenceScreen().removeAll();
+//		addPreferencesFromResource(R.xml.pref_main_menu);
 	}
 
 	
