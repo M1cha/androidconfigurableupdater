@@ -42,7 +42,7 @@
             </ScrollView>
         </LinearLayout>
         
-        <LinearLayout
+        <!-- <LinearLayout
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content"  
           android:gravity="bottom">
@@ -54,6 +54,6 @@
 	          android:layout_weight="1"
 	          android:onClick="onClickHandler">
 	        </Button>
-        </LinearLayout>
+        </LinearLayout>-->
     </LinearLayout>
 </LinearLayout>
