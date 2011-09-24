@@ -21,6 +21,7 @@
     <string name="lang_menuMain_msgRestore">Success!</string>
     <string name="lang_intro_buttonNext">Next</string>
     <string name="lang_rom_selection_title">Select ROM</string>
+    <string name="lang_rom_selection_noRomSelected">No ROM Selected!</string>
     <string name="lang_rom_selection_buttonNext">Next</string>
     <string name="lang_rom_selection_buttonNoRom">No Rom?</string>
     <string name="lang_rom_selection_buttonRoms">Select a ROM...</string>

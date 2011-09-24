@@ -31,10 +31,22 @@ public class RomListActivity extends Activity {
 		
 		/** set layout */
 		setContentView(R.layout.rom_selection);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		
 		/** get romList */
 		this.romList = new RomList(this, getString(R.string.default_romFolder));
 		this.romNames = this.romList.getRomNames();
+		
+		if(this.romNames.length<=0) {
+			ma.setInstallTabEnabled(false);
+		}
+		else {
+			ma.setInstallTabEnabled(true);
+		}
 		
 		/** add roms to spinner */
 		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, romNames);
@@ -53,19 +65,20 @@ public class RomListActivity extends Activity {
 			public void onNothingSelected(AdapterView<?> arg0) {
 			}
 		});
-		
 	}
 	
 	/** onClick-Handler */
     public void onClickHandler(View view) {
     	
     	switch(view.getId()) {
-    		case R.id.intro_buttonManual:
-    			ma.setCurrentTab(3);
-    		break;
-    		case R.id.intro_buttonNext:
-    			ma.setCurrentTab(1);
-    		break;
+			case R.id.rom_selection_buttonNext:
+				ma.setCurrentTab(2);
+			break;
+			case R.id.rom_selection_buttonChangelog:
+				if(this.changelog!=null) {
+					Util.showPopup(this, getString(R.string.lang_romChangelog_title), changelog);
+				}
+			break;
     	}
     }
     
@@ -104,7 +117,5 @@ public class RomListActivity extends Activity {
 		/** set current ROM */
 		DataStore.currentRom = this.romList.getRom(index);
 		findViewById(R.id.rom_selection_buttonNext).setEnabled(true);
-        
 	}
-
 }
