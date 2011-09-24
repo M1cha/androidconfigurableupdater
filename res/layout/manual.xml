@@ -42,18 +42,18 @@
             </ScrollView>
         </LinearLayout>
         
-        <!-- <LinearLayout
+        <LinearLayout
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content"  
           android:gravity="bottom">
 	        <Button 
-	          android:text="@string/lang_manual_buttonNext" 
-	          android:id="@+id/manual_buttonNext" 
+	          android:text="@string/lang_manual_buttonClose" 
+	          android:id="@+id/manual_buttonClose" 
 	          android:layout_width="fill_parent" 
 	          android:layout_height="wrap_content" 
 	          android:layout_weight="1"
 	          android:onClick="onClickHandler">
 	        </Button>
-        </LinearLayout>-->
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

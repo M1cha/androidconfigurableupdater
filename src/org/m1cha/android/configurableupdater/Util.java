@@ -199,9 +199,15 @@ public class Util {
     private static Context contextFeedback;
     public static void menuHandler(Context context, MenuItem item) {
     	switch(item.getItemId()) {
+    	
+    		case R.id.menuMain_itemManual:
+    			Intent iManual = new Intent(context, ManualActivity.class);
+    			context.startActivity(iManual);
+    		break;
+    	
 			case R.id.menuMain_itemSettings:
-				Intent i = new Intent(context, MainPreferenceActivity.class);
-				context.startActivity(i);
+				Intent iSettings = new Intent(context, MainPreferenceActivity.class);
+				context.startActivity(iSettings);
 			break;
 			
 			case R.id.menuMain_itemFeedback:

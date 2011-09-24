@@ -14,8 +14,8 @@
             </intent-filter>
         </activity>
         <activity android:name="MainPreferenceActivity"></activity>
-        <activity android:name=".IntroActivity"></activity>
         <activity android:name=".DownloadActivity"></activity>
+        <activity android:name=".RomListActivity"></activity>
         <activity android:name=".OptionSelectionActivity"></activity>
         <activity android:name=".ManualActivity"></activity>
 
