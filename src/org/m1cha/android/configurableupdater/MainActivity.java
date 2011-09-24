@@ -4,6 +4,7 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 
@@ -11,6 +12,7 @@ import android.widget.TabHost;
 public class MainActivity extends TabActivity {
 	
 	private TabHost tabHost;
+	private boolean installTabEnabled=true;
     
 	
     /** Called when the activity is first created. */
@@ -36,6 +38,21 @@ public class MainActivity extends TabActivity {
         intent = new Intent().setClass(this, OptionSelectionActivity.class);
         spec = tabHost.newTabSpec("optionselection").setIndicator("Installieren").setContent(intent);
         tabHost.addTab(spec);
+        
+        /** disable install-tab */
+		tabHost.getTabWidget().getChildAt(2).setOnClickListener(new OnClickListener() {
+					
+				@Override
+				public void onClick(View v) {
+					if(!getInstallTabEnabled()) {
+						Util.alert(v.getContext(), getString(R.string.lang_rom_selection_noRomSelected));
+					}
+					else {
+						setCurrentTab(2);
+					}
+				}
+			});
+        this.setInstallTabEnabled(false);
 
         tabHost.setCurrentTab(0);
     }
@@ -50,5 +67,13 @@ public class MainActivity extends TabActivity {
     
     public LinearLayout getBottomLayout() {
     	return (LinearLayout)findViewById(R.id.tabhost_layoutBottom);
+    }
+    
+    
+    public void setInstallTabEnabled(boolean b) {
+    	this.installTabEnabled = b;
+    }
+    public boolean getInstallTabEnabled() {
+    	return this.installTabEnabled;
     }
 }
