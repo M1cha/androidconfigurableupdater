@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
+  	<item android:id="@+id/menuMain_itemManual" android:title="@string/lang_menuMain_itemManual"></item>
     <item android:id="@+id/menuMain_itemSettings" android:title="@string/lang_menuMain_itemSettings"></item>
     <item android:id="@+id/menuMain_itemFeedback" android:title="@string/lang_menuMain_itemFeedback"></item>
     <item android:id="@+id/menuMain_itemAbout" android:title="@string/lang_menuMain_itemAbout"></item>

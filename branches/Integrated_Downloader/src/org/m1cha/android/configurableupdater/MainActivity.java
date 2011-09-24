@@ -24,25 +24,18 @@ public class MainActivity extends TabActivity {
         tabHost = getTabHost();
         TabHost.TabSpec spec;
         Intent intent;
-
-        intent = new Intent().setClass(this, IntroActivity.class);
-        spec = tabHost.newTabSpec("intro").setIndicator("Start").setContent(intent);
-        tabHost.addTab(spec);
         
         intent = new Intent().setClass(this, DownloadActivity.class);
         spec = tabHost.newTabSpec("download").setIndicator("Download").setContent(intent);
         tabHost.addTab(spec);
         
+        intent = new Intent().setClass(this, RomListActivity.class);
+        spec = tabHost.newTabSpec("romlist").setIndicator("Rom-Liste").setContent(intent);
+        tabHost.addTab(spec);
+        
         intent = new Intent().setClass(this, OptionSelectionActivity.class);
         spec = tabHost.newTabSpec("optionselection").setIndicator("Installieren").setContent(intent);
         tabHost.addTab(spec);
-        
-        intent = new Intent().setClass(this, ManualActivity.class);
-        spec = tabHost.newTabSpec("help").setIndicator("?").setContent(intent);
-        tabHost.addTab(spec);
-        
-        tabHost.getTabWidget().getChildAt(3).setLayoutParams(new 
-        		LinearLayout.LayoutParams(tabHost.getTabWidget().getChildAt(3).getLayoutParams().height,tabHost.getTabWidget().getChildAt(3).getLayoutParams().height)); 
 
         tabHost.setCurrentTab(0);
     }

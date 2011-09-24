@@ -5,13 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 
 public class ManualActivity extends Activity {
@@ -38,6 +38,17 @@ public class ManualActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
 		Util.menuHandler(this, item);
     	return super.onOptionsItemSelected(item);
+    }
+	
+	/** onClick-Handler */
+    public void onClickHandler(View view) {
+    	
+    	switch(view.getId()) {
+    		
+    		case R.id.manual_buttonClose:
+    			finish();
+    		break;
+    	}
     }
     
     private void showManual() {
