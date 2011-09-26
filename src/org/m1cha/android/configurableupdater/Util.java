@@ -2,7 +2,6 @@ package org.m1cha.android.configurableupdater;
 
 import java.io.BufferedReader;
 import android.view.View.OnClickListener;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -291,7 +290,7 @@ public class Util {
 			/** gain superuser shell */
 			p = Runtime.getRuntime().exec("su");
 			OutputStream os = p.getOutputStream();
-
+			
 			/** run script from customisation-folder */
 			// don't know why but it does not work
 			/*File rebootScript = getCustomFile("reboot.sh");
@@ -300,13 +299,25 @@ public class Util {
 			}
 			
 			else */if(android.os.Build.MODEL.equals("MB525")) {
-            	/** set bootmode to recovery */
-    			os.write("mkdir -p /cache/recovery/\n".getBytes());
-                os.write("echo 'recovery' >/cache/recovery/bootmode.conf\n".getBytes());
+				
+				/** NEW reboot-method for defy */
+				if(Util.getProperty("ro.build.newrecoveryreboot").equals("1")) {
+					os.write("reboot recovery\n".getBytes());
+				}
+				
+				/** OLD reboot-method for defy */
+				else {
+					/** set bootmode to recovery */
+	    			os.write("mkdir -p /cache/recovery/\n".getBytes());
+	                os.write("echo 'recovery' >/cache/recovery/bootmode.conf\n".getBytes());
+	            	
+	            	/** reboot */
+	                os.write("reboot\n".getBytes());
+				}
             	
-            	/** reboot */
-                os.write("reboot\n".getBytes());
             }
+			
+			/** standard reboot-method for all devices */
             else {
             	os.write("reboot recovery\n".getBytes());
             }
@@ -323,4 +334,37 @@ public class Util {
     public static String getDefaultRomFolder() {
     	return defaultRomFolder;
     }
+    
+    public static String getProperty(String name) { 
+    	/** string for result */
+    	String result="";
+    	
+		try 
+		{
+			/** string for one line */
+			String line;
+			
+			/** execute command */
+			java.lang.Process p = Runtime.getRuntime().exec("getprop "+name);
+			
+			/** get inputstream */
+			BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			
+			/** read all lines */
+			while ((line = input.readLine()) != null) 
+			{ 
+				result+=line;
+			}
+			
+			/** close stream */
+			input.close(); 
+		} 
+		catch (Exception e) 
+		{ 
+			Logger.debug("failed getting prop: "+name, e);
+		}
+		
+		/** return result */
+		return result;
+	} 
 }
