@@ -91,8 +91,10 @@ public class MainActivity extends Activity {
         
         ArrayList<MountPoint> mountPoints = Util.getMountPoints();
         for(int i=0; i<mountPoints.size(); i++) {
-        	if(mountPoints.get(i).getDevice().equals("/dev/block/vold/179:9")) {
-        		Util.alert(this, "SDCard is mountet at: "+mountPoints.get(i).getMountPoint());
+        	MountPoint mountPoint = mountPoints.get(i);
+        	
+        	if(mountPoint.getDevice().equals("/dev/block/vold/179:9") && !mountPoint.getMountPoint().equals("/mnt/secure/asec")) {
+        		Util.alert(this, "SDCard is mountet at: "+mountPoint.getMountPoint());
         	}
         }
         
