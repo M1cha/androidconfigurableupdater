@@ -3,6 +3,8 @@ package org.m1cha.android.configurableupdater;
 import java.io.BufferedReader;
 import android.view.View.OnClickListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,6 +13,7 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -366,5 +369,38 @@ public class Util {
 		
 		/** return result */
 		return result;
-	} 
+	}
+    
+    public static ArrayList<MountPoint> getMountPoints() {
+    	ArrayList<MountPoint> mountPoints = new ArrayList<MountPoint>();
+    	
+    	try {
+			/** open mounts-file */
+			BufferedReader reader = new BufferedReader(new FileReader("/proc/mounts"));
+			
+			String line;
+	        while ((line = reader.readLine()) != null) {
+	        	
+	        	/** split line into single parts */
+	        	String[] parts = line.split(" +");
+	        	
+	        	/** continue if we don't have enough info */
+	        	if(parts.length<3) continue;
+	        	
+	        	/** get info */
+	        	String device = parts[0];
+	        	String mountPoint = parts[1];
+	        	String fsType = parts[2];
+	        	
+	        	/** add to arrayList */
+	        	mountPoints.add(new MountPoint(device, mountPoint, fsType));
+	        }
+		} catch (FileNotFoundException e) {
+			Logger.debug("Unable to open Mount-File", e);
+		} catch (IOException e) {
+			Logger.debug("IO-Error in getMountPoints()", e);
+		}
+    	
+    	return mountPoints;
+    }
 }

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import org.m1cha.android.configurableupdater.romtools.RomList;
 import android.app.Activity;
 import android.content.Intent;
@@ -87,6 +88,14 @@ public class MainActivity extends Activity {
         
         /** show view */
         showView(firstViewId, ANIM_DISABLED);
+        
+        ArrayList<MountPoint> mountPoints = Util.getMountPoints();
+        for(int i=0; i<mountPoints.size(); i++) {
+        	if(mountPoints.get(i).equals("/dev/block/vold/179:17")) {
+        		Util.alert(this, "SDCard is mountet at: "+mountPoints.get(i).getMountPoint());
+        	}
+        }
+        
     }
     
     public static void setRomFolder(String s) {
