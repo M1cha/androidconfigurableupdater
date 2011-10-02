@@ -62,7 +62,7 @@ public class OptionSelectionActivity extends PreferenceActivity {
 	    
 	    /** load preference-xml */
 	    addPreferencesFromResource(R.xml.pref_option_selection);
-	    main = ((PreferenceScreen)findPreference("PREFSMAIN"));
+	    main = getPreferenceScreen();
 	    
 	    /** add buttons */
 	    this.addButtons();
@@ -210,60 +210,67 @@ public class OptionSelectionActivity extends PreferenceActivity {
 	    bottomLayout.setBackgroundDrawable(getListView().getBackground());
 	}
 	
+	private final int OPTIONS_NOTHING_CHANGED = 0;
+	private final int OPTIONS_SUCCESS = 1;
+	private final int OPTIONS_ERROR = -1;
+	private int saveOptions(boolean alertWhenNothingChanged) {
+		/** generate parameter from GUI */
+		String parameter = "";
+		for(int i=0; i<this.options.size(); i++) {
+			OptionObject option = this.options.get(i);
+			
+			if(option.getType().equals("checkbox")) {
+				CheckBoxPreference pref = (CheckBoxPreference)option.getPreference();
+				
+				if(pref.isChecked()) {
+					parameter+="-"+option.getValue();
+				}
+			}
+			else if(option.getType().equals("list")) {
+				ListPreference pref = (ListPreference)option.getPreference();
+				
+				if(pref.getValue().length()>0) {
+					parameter+="-"+pref.getValue();
+				}
+			}
+			
+		}
+		
+		/** create new file-object */
+		File newFile = new File(this.currentRom.getFile().getParent(), this.currentRom.getRomName()+"-"+this.currentRom.getKernelVersion()+parameter+".zip");
+		
+		/** check if anything was changed */
+		if(newFile.getName().equals(this.currentRom.getFile().getName())) {
+			if(alertWhenNothingChanged) Util.alert(this, getString(R.string.lang_error_nothingChanged));
+			return OPTIONS_NOTHING_CHANGED;
+		}
+		
+		/** check if we can write */
+		if(!this.currentRom.getFile().canWrite()) {
+			Util.alert(this, getString(R.string.lang_error_writeNewFile));
+			return OPTIONS_ERROR;
+		}
+		
+		/** check if file already exists */
+		if(newFile.exists()) {
+			Util.alert(this, getString(R.string.lang_error_fileExists));
+			return OPTIONS_ERROR;
+		}
+		
+		/** rename file */
+		this.currentRom.getFile().renameTo(newFile);
+		this.currentRom.setFile(newFile);
+		
+		return OPTIONS_SUCCESS;
+	}
+	
 	public void onClickHandler(View v) {
 		
 		if(v==OptionSelectionActivity.this.buttonSave) {
-			
-			/** generate parameter from GUI */
-			String parameter = "";
-			for(int i=0; i<this.options.size(); i++) {
-				OptionObject option = this.options.get(i);
-				
-				if(option.getType().equals("checkbox")) {
-					CheckBoxPreference pref = (CheckBoxPreference)option.getPreference();
-					
-					if(pref.isChecked()) {
-						parameter+="-"+option.getValue();
-					}
-				}
-				else if(option.getType().equals("list")) {
-					ListPreference pref = (ListPreference)option.getPreference();
-					
-					if(pref.getValue().length()>0) {
-						parameter+="-"+pref.getValue();
-					}
-					Logger.debug(pref.getValue());
-				}
-				
+			if(saveOptions(true)==OPTIONS_SUCCESS) {
+				/** show success-message */
+				Util.alert(this, getString(R.string.lang_menuMain_msgRestore));
 			}
-			
-			/** create new file-object */
-			File newFile = new File(this.currentRom.getFile().getParent(), this.currentRom.getRomName()+"-"+this.currentRom.getKernelVersion()+parameter+".zip");
-			
-			/** check if anything was changed */
-			if(newFile.getName().equals(this.currentRom.getFile().getName())) {
-				Util.alert(this, getString(R.string.lang_error_nothingChanged));
-				return;
-			}
-			
-			/** check if we can write */
-			if(!this.currentRom.getFile().canWrite()) {
-				Util.alert(this, getString(R.string.lang_error_writeNewFile));
-				return;
-			}
-			
-			/** check if file already exists */
-			if(newFile.exists()) {
-				Util.alert(this, getString(R.string.lang_error_fileExists));
-				return;
-			}
-			
-			/** rename file */
-			this.currentRom.getFile().renameTo(newFile);
-			this.currentRom.setFile(newFile);
-			
-			/** show message */
-			Util.alert(this, getString(R.string.lang_menuMain_msgRestore));
 		}
 		
 		else if(v==OptionSelectionActivity.this.buttonReboot) {
@@ -274,7 +281,9 @@ public class OptionSelectionActivity extends PreferenceActivity {
 					switch(which) {
 
 						case DialogInterface.BUTTON_POSITIVE:
-							Util.rebootPhone();
+							if(saveOptions(false)==OPTIONS_SUCCESS) {
+								Util.rebootPhone();
+							}
 						break;
 					}
 				}
