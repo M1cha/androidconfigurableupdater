@@ -322,11 +322,7 @@ public class Util {
 		}
     }
     
-    private static String defaultRomFolder="";
-    public static void setDefaultRomFolder(String s) {
-    	defaultRomFolder = s;
-    }
-    public static String getDefaultRomFolder() {
-    	return defaultRomFolder;
+    public static String getDefaultRomFolder(Context context) {
+    	return context.getString(R.string.default_romFolder);
     }
 }
