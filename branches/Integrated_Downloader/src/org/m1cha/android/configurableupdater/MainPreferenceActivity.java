@@ -1,7 +1,6 @@
 package org.m1cha.android.configurableupdater;
 
 import java.util.Map;
-
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -9,8 +8,6 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -20,13 +17,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 	
 	private Button buttonReset;
 	private EditTextPreference prefRomlist;
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_main, menu);
-		return true;
-	}
 	
 	/** 
 	 * Called when the activity is first created. 
