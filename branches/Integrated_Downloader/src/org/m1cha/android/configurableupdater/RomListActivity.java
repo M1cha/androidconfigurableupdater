@@ -43,17 +43,28 @@ public class RomListActivity extends Activity {
 		
 		/** set layout */
 		setContentView(R.layout.rom_selection);
+		
+		/** find spinner */
+		this.spinner_roms = (Spinner)findViewById(R.id.rom_selection_buttonRoms);
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		
+		/** save currently selected Rom */
+		int oldSelectionIndex = this.spinner_roms.getSelectedItemPosition();
+		String oldSelectionName = null;
+		if(oldSelectionIndex!=Spinner.INVALID_POSITION) {
+			oldSelectionName = this.romList.getRom(oldSelectionIndex).getRomName();
+		}
+		
+		
 		/** get romList */
 		this.romList = new RomList(this, PreferenceManager.getDefaultSharedPreferences(this).getString("romfolder", Util.getDefaultRomFolder(this)));
 		this.romNames = this.romList.getRomNames();
 		
-		/** activate instal-tab depending of roms were found */
+		/** activate install-tab depending of roms were found */
 		if(this.romNames.length<=0) {
 			ma.setInstallTabEnabled(false);
 		}
@@ -63,7 +74,6 @@ public class RomListActivity extends Activity {
 		
 		/** add roms to spinner */
 		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, romNames);
-		this.spinner_roms = (Spinner)findViewById(R.id.rom_selection_buttonRoms);
 		this.spinner_roms.setAdapter(spinnerArrayAdapter);
 		
 		/** onselected-Listener for spinner */
@@ -78,6 +88,16 @@ public class RomListActivity extends Activity {
 			public void onNothingSelected(AdapterView<?> arg0) {
 			}
 		});
+		
+		/** set current selection to old selection if there was one */
+		if(oldSelectionName!=null) {
+			for(int i=0; i<spinnerArrayAdapter.getCount(); i++) {
+				if(this.romList.getRom(i).getRomName().equals(oldSelectionName)) {
+					this.spinner_roms.setSelection(i, true);
+				}
+			}
+		}
+		
 	}
 	
 	/** onClick-Handler */
