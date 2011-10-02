@@ -1,9 +1,9 @@
 package org.m1cha.android.configurableupdater;
 
 import org.m1cha.android.configurableupdater.romtools.RomList;
-
 import android.app.Activity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,6 +23,18 @@ public class RomListActivity extends Activity {
 	private String changelog;
 	
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_main, menu);
+		return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Util.menuHandler(this, item);
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -38,9 +50,10 @@ public class RomListActivity extends Activity {
 		super.onResume();
 		
 		/** get romList */
-		this.romList = new RomList(this, getString(R.string.default_romFolder));
+		this.romList = new RomList(this, PreferenceManager.getDefaultSharedPreferences(this).getString("romfolder", Util.getDefaultRomFolder(this)));
 		this.romNames = this.romList.getRomNames();
 		
+		/** activate instal-tab depending of roms were found */
 		if(this.romNames.length<=0) {
 			ma.setInstallTabEnabled(false);
 		}
@@ -53,7 +66,7 @@ public class RomListActivity extends Activity {
 		this.spinner_roms = (Spinner)findViewById(R.id.rom_selection_buttonRoms);
 		this.spinner_roms.setAdapter(spinnerArrayAdapter);
 		
-		/** onclick-Listener for spinner */
+		/** onselected-Listener for spinner */
 		this.spinner_roms.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -82,18 +95,11 @@ public class RomListActivity extends Activity {
     	}
     }
     
-    @Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_main, menu);
-		return true;
-	}
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-		Util.menuHandler(this, item);
-    	return super.onOptionsItemSelected(item);
-    }
-	
+
+    /**
+     * update view so it show infos about the selected rom
+     * @param index
+     */
 	public void RomSelection_setRom(int index) {
 		
 		/** set cover */

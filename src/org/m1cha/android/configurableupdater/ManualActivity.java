@@ -8,9 +8,6 @@ import java.io.InputStream;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 
@@ -27,18 +24,6 @@ public class ManualActivity extends Activity {
 		this.showManual();
 		
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_main, menu);
-		return true;
-	}
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-		Util.menuHandler(this, item);
-    	return super.onOptionsItemSelected(item);
-    }
 	
 	/** onClick-Handler */
     public void onClickHandler(View view) {
