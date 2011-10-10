@@ -5,5 +5,9 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
     <TextView android:id="@+id/textView1" android:layout_width="wrap_content" android:text="NOT_IMPLEMENTED" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+   
+     <Button android:text="Start Download" android:id="@+id/button1"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:onClick="onClick"></Button>
     
 </LinearLayout>

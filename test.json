@@ -1,0 +1,125 @@
+
+{
+    "MirrorList":
+	[
+		"http://www.einsteinno1.de/android/ota/defy/roms/"
+    ],
+    "UpdateList":
+	[
+		{
+			"mod": "*",
+			"board": "*",
+			"type": "rom",
+			"name": "Defy MIUI 1.9.23 PE ( 1..2..3.. )",
+			"version": "MIUI-1.9.23",
+			"description": "WICHTIG !!!! -> Standard ist FULLWIPE|Installation Optionen mit dem neuen MIUI FLAG CONFIGER, mehr im Forum/Blog|Update auf MIUI 1.9.23 in deutsch|Juve Ram Mod / APN Liste / Adfree|GPS Fix / Zipalign Tweak||Wifi PowerSave Mod|UPDATE SpeedTweaks in der build.prob|UPDATE GPS Config Mods|UPDATE Wifi Config Mods|UPDATE Extended Settings Mod 1.9.23|UPDATE 4Way/VolumeSkip Mod|UPDATE CM7 Kamera|UPDATE Optionen im Configer|NEW First Boot Settings|NEW SSH und Rsync Scripts|Theme geht wieder|weitere Tweaks + Optionen..|-> 153 MB Download|",
+			"branch": "S",
+			"filename": "PikachuEdition-1923-fullwipe-first.zip"
+        },
+        {
+			"mod": "*",
+			"board": "*",
+			"type": "rom",
+			"name": "Defy MIUI 1.9.16 PE ( 1..2..3.. )",
+			"version": "MIUI-1.9.16",
+			"description": "WICHTIG !!!! -> Standard ist FULLWIPE|Installation Optionen mit dem neuen MIUI PE CONFIGER, mehr im Forum/Blog|Update auf MIUI 1.9.16|Juve Ram Mod / APN Liste / Adfree|GPS Fix / Zipalign Tweak||Wifi PowerSave Mod|UPDATE SpeedTweaks in der build.prob|UPDATE Gps Config|mSDclass Mod|Extended Settings Mod mit App|Android Keyboard mit Vibration|UPDATE CM7 Camera|NEW Wifi Tether App|UPDATE Optionen im Configer|weitere Tweaks per MIUI PE CONFIGER|-> 151 MB Download|",
+			"branch": "S",
+			"filename": "PikachuEdition-1916-fullwipe.zip"
+        },
+		{
+			"mod": "*",
+			"board": "*",
+			"type": "rom",
+			"name": "Defy MIUI 1.9.9 PE ( 1..2..3.. )",
+			"version": "MIUI-1.9.9",
+			"description": "WICHTIG !!!! -> Standard ist FULLWIPE|Installation Optionen mit dem neuen MIUI PE CONFIGER, mehr im Forum/Blog|Update auf MIUI 1.9.9|Juve Ram Mod / APN Liste / Adfree|GPS Fix / Zipalign Tweak|WPA/WPA2 Hack|Wifi PowerSave Mod|aGPS FIX Pro|Neue SpeedTweaks in der build.prob|Callrecording Library von CM7|mSDclass Mod|Extended Settings Mod mit App|4Way Boot / Volume Skip|Android Keyboard mit Vibration|UPDATE CM7 Camera|Spare Parts App|Update Google Maps 5.10|weitere Tweaks per MIUI PE CONFIGER|-> 146 MB Download|",
+			"branch": "S",
+			"filename": "PikachuEdition-199-fullwipe.zip"
+        },
+        {
+			"mod": "*",
+			"board": "*",
+			"type": "rom",
+			"name": "Defy MIUI 1.9.2 PE ( 1..2..3.. )",
+			"version": "MIUI-1.9.2",
+			"description": "WICHTIG !!!! -> Standard ist FULLWIPE|Installations Optionen, mehr im Forum/Blog  |Update auf MIUI 1.9.2|Juve Ram Mod / APN Liste / Adfree|GPS Fix / Zipalign Tweak|WPA/WPA2 Hack fÃ¼r Wifi Tether App|Wifi PowerSave Mod|aGPS FIX Pro|Neue SpeedTweaks in der build.prob|Extended Settings Mod mit App|4Way Boot / Volume Skip|Android Keyboard Vibration Fix|UPDATE CM7 Camera|Spare Parts App|weitere Tweaks im Miui Updater|-> 150 MB Download|",
+			"branch": "S",
+			"filename": "PikachuEdition-192-fullwipe.zip"
+        },
+        {
+			"mod": "*",
+			"board": "*",
+			"type": "rom",
+			"name": "Defy MIUI 1.8.27 PE ( Custom )",
+			"version": "MIUI-1.8.27",
+			"description": "WICHTIG !!!! -> Standard ist FULLWIPE|Zum installieren in NONWIPE einfach das -fullwipe im Namen der Zip Datei entfernen|Update auf MIUI 1.8.27 ( thx Wajk )|Ãœbersetzungen von Wajk, Andy und Mir|Juve Ram Mod/ APN Liste / Adfree|GPS Fix / Zipalign Tweak|WPA/WPA2 Hack fÃ¼r Wifi Tether App|Wifi PowerSave Mod|aGPS FIX Pro|Neue SpeedTweaks in der build.prob|Extended Settings Mod mit App|1GHZ CPU Standard|UPDATE CM7 Camera|UPDATE Google Maps 5.9|UPDATE Flash 10.3|weitere Tweaks im Miui Updater|-> 145 MB Download|",
+			"branch": "S",
+			"filename": "PikachuEdition-1827-fullwipe.zip"
+        },
+        {
+			"mod": "*",
+			"board": "*",
+			"type": "rom",
+			"name": "Defy MIUI 1.8.19 PE ( Full Wipe )",
+			"version": "MIUI-1.8.19",
+			"description": "WICHTIG !!!! -> FULL Wipe Version|Update auf MIUI 1.8.19|deutsches Sprachpaket von Andy|Juve Ram Mod/ APN Liste / Adfree|GPS Fix / Zipalign Tweak|4Way Boot Mod / Volume Skip Hack|Extended Settings Mod|Carrier Logo Mod mit 10 Logos|WPA/WPA2 Hack fÃ¼r Wifi Tether App|Data Apps deinstallierbar|1GHZ CPU Standard|UPDATE CM7 Camera|UPDATE Google Maps 5.9|UPDATE Flash 10.3|kleine Tweaks/Hacks/Mods|weitere Tweaks im Miui Updater|-> 136 MB Download|",
+			"branch": "S",
+			"filename": "FULL_Wipe_MIUI_Defy_1.8.19.zip"
+        },
+        {
+			"mod": "*",
+			"board": "*",
+			"type": "rom",
+			"name": "Defy MIUI 1.8.12 PE ( Full Wipe )",
+			"version": "MIUI-1.8.12",
+			"description": "WICHTIG !!!! -> FULL Wipe Version|Update auf MIUI 1.8.12|deutsches Sprachpaket von Andy|Battery 1% / 10TouchMod / Adfree|GPS Fix / Zipalign Tweak|APN Liste Update / Update Google Apps|4Way Boot Mod / Volume Skip Hack|Extended Settings Mod|Carrier Logo Mod per Tweak down.|WPA/WPA2 Hack fÃ¼r Wifi Tether App|Data Apps deinstallierbar|1GHZ CPU Standard|Neuste CM7 Camera|kleine Tweaks/Hacks/Mods|weitere Tweaks im Miui Updater|-> 138 MB Download|",
+			"branch": "S",
+			"filename": "FULL_Wipe_MIUI_Defy_1.8.12.zip"
+        },
+        {
+			"mod": "*",
+			"board": "*",
+			"type": "rom",
+			"name": "Defy MIUI 1.8.12 PE ( Non Wipe )",
+			"version": "MIUI-1.8.12",
+			"description": "WICHTIG !!!! -> NON Wipe Version|Update auf MIUI 1.8.12|deutsches Sprachpaket von Andy|Battery 1% / 10TouchMod / Adfree|GPS Fix / Zipalign Tweak|APN Liste Update / Update Google Apps|4Way Boot Mod / Volume Skip Hack|Extended Settings Mod|Carrier Logo Mod per Tweak down.|WPA/WPA2 Hack fÃ¼r Wifi Tether App|Data Apps deinstallierbar|1GHZ CPU Standard|Neuste CM7 Camera|kleine Tweaks/Hacks/Mods|weitere Tweaks im Miui Updater|-> 138 MB Download|",
+			"branch": "S",
+			"filename": "NON_Wipe_MIUI_Defy_1.8.12.zip"
+        },
+       {
+			"mod": "*",
+			"board": "*",
+			"type": "rom",
+			"name": "Defy MIUI 1.7.22 PE ( Full Wipe )",
+			"version": "MIUI-1.7.22",
+			"description": "WICHTIG !!!! -> FULL Wipe Version|Update auf MIUI 1.7.22|deutsches Sprachpaket von Andy|Battery 1% / 10TouchMod|GPS Fix / Zipalign Tweak|Volumeskip Hack|Root App Remover MIUI Edition|FM Radio v.2.0 / Stock Camera|DeskClock von CM7|MIUI Defy UPDATER APP|NEW Android Market 3.0.27|16 Extra Clock Widgets|Extended Settings Mod|Wallpaper Scrolling Hack|Extra Apps + Media Files|weitere Tweaks im Miui Updater|-> 128 MB Download|",
+			"branch": "S",
+			"filename": "FULL_Wipe_MIUI_Defy_1.7.22.zip"
+        },
+        {
+			"mod": "*",
+			"board": "*",
+			"type": "rom",
+			"name": "Defy MIUI 1.7.22 PE ( NON Wipe )",
+			"version": "MIUI-1.7.22",
+			"description": "WICHTIG !!!! -> NON Wipe Version|Update auf MIUI 1.7.22|deutsches Sprachpaket von Andy|Battery 1% / 10TouchMod|GPS Fix / Zipalign Tweak|Volumeskip Hack|Root App Remover MIUI Edition|FM Radio v.2.0 / Stock Camera|DeskClock von CM7|MIUI Defy UPDATER APP|NEW Android Market 3.0.27|16 Extra Clock Widgets|Extended Settings Mod|Wallpaper Scrolling Hack|Extra Apps + Media Files|weitere Tweaks im Miui Updater|-> 128 MB Download|",
+			"branch": "S",
+			"filename": "NON_Wipe_MIUI_Defy_1.7.22.zip"
+        },
+                     		
+	],
+	"IncrementalUpdateList":
+	[
+		{
+			"mod": "*",
+			"board": "bravo",
+			"type": "rom",
+			"name": "MIUI CM Updater Mod V7",
+			"version": "1.6.10.1",
+			"versionForApply":"1.6.10",
+			"description": "Greets, skp3c0, xj",
+			"branch": "X",
+			"filename": "MIUI_XJ_CMUpdater_Mod_for_OTA_V7_Signed.zip"
+        }
+	]
+}

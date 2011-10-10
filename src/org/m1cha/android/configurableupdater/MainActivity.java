@@ -27,9 +27,9 @@ public class MainActivity extends TabActivity {
         TabHost.TabSpec spec;
         Intent intent;
         
-        intent = new Intent().setClass(this, DownloadActivity.class);
+        /*intent = new Intent().setClass(this, DownloadActivity.class);
         spec = tabHost.newTabSpec("download").setIndicator("Download").setContent(intent);
-        tabHost.addTab(spec);
+        tabHost.addTab(spec);*/
         
         intent = new Intent().setClass(this, RomListActivity.class);
         spec = tabHost.newTabSpec("romlist").setIndicator("Rom-Liste").setContent(intent);
@@ -40,7 +40,7 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(spec);
         
         /** disable install-tab */
-		tabHost.getTabWidget().getChildAt(2).setOnClickListener(new OnClickListener() {
+		tabHost.getTabWidget().getChildAt(1).setOnClickListener(new OnClickListener() {
 					
 				@Override
 				public void onClick(View v) {
@@ -48,7 +48,7 @@ public class MainActivity extends TabActivity {
 						Util.alert(v.getContext(), getString(R.string.lang_rom_selection_noRomSelected));
 					}
 					else {
-						setCurrentTab(2);
+						setCurrentTab(1);
 					}
 				}
 			});
