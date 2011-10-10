@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import android.view.View.OnClickListener;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,9 +14,16 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -86,6 +95,35 @@ public class Util {
             return "";
         }
     }
+    
+    public static String getStringFromUrl(String uri) throws Exception {
+    	
+		try {
+			HttpClient client = new DefaultHttpClient();
+			HttpGet request = new HttpGet();
+			request.setURI(new URI(uri));
+			HttpResponse response = client.execute(request);
+			InputStream ips  = response.getEntity().getContent();
+			BufferedReader buf = new BufferedReader(new InputStreamReader(ips,"UTF-8"));
+			
+			StringBuilder sb = new StringBuilder();
+			String s;
+	        while(true )
+	        {
+	            s = buf.readLine();
+	            if(s==null || s.length()==0)
+	                break;
+	            sb.append(s);
+
+	        }
+			buf.close();
+			ips.close();
+			return sb.toString();
+		
+		} 
+		finally {
+		}
+	} 
     
     public static int dipToPixel(Context context, float dipValue) {
     	float scale = context.getResources().getDisplayMetrics().density;
@@ -322,7 +360,70 @@ public class Util {
 		}
     }
     
+    public static ArrayList<MountPoint> getMountPoints() {
+    	ArrayList<MountPoint> mountPoints = new ArrayList<MountPoint>();
+    	
+    	try {
+			/** open mounts-file */
+			BufferedReader reader = new BufferedReader(new FileReader("/proc/mounts"));
+			
+			String line;
+	        while ((line = reader.readLine()) != null) {
+	        	
+	        	/** split line into single parts */
+	        	String[] parts = line.split(" +");
+	        	
+	        	/** continue if we don't have enough info */
+	        	if(parts.length<3) continue;
+	        	
+	        	/** get info */
+	        	String device = parts[0];
+	        	String mountPoint = parts[1];
+	        	String fsType = parts[2];
+	        	
+	        	/** add to arrayList */
+	        	mountPoints.add(new MountPoint(device, mountPoint, fsType));
+	        }
+		} catch (FileNotFoundException e) {
+			Logger.debug("Unable to open Mount-File", e);
+		} catch (IOException e) {
+			Logger.debug("IO-Error in getMountPoints()", e);
+		}
+    	
+    	return mountPoints;
+    }
+    
     public static String getDefaultRomFolder(Context context) {
     	return context.getString(R.string.default_romFolder);
+    }
+    
+    public static File getExternalStorage(String path) {
+    	
+    	/** for LG Optimus Speed */
+    	if(android.os.Build.MODEL.equals("Optimus 2X")) {
+    		
+    		/** get mountPoints */
+	    	ArrayList<MountPoint> mountPoints = Util.getMountPoints();
+	    	
+	    	/** iterate over mountPoints */
+	        for(int i=0; i<mountPoints.size(); i++) {
+	        	
+	        	/** get current mointPoint */
+	        	MountPoint mountPoint = mountPoints.get(i);
+	        	
+	        	/** check if current mountPoint is the sdcard and NOT asec-mount */
+	        	if(mountPoint.getDevice().equals("/dev/block/vold/179:17") && !mountPoint.getMountPoint().equals("/mnt/secure/asec")) {
+	        		return new File(mountPoint.getMountPoint()+"/"+path);
+	        	}
+	        }
+    	}
+    	
+    	/** for Google Nexus S */
+    	if(android.os.Build.MODEL.equals("Nexus S")) {
+    		return new File("/"+path);
+    	}
+    	
+    	/** for standard-devices */
+    	return Environment.getExternalStoragePublicDirectory(path);
     }
 }

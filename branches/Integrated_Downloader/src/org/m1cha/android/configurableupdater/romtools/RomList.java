@@ -26,7 +26,7 @@ public class RomList {
 		this.context = context;
 		
 		/** open directory */
-		this.sdcard = Environment.getExternalStoragePublicDirectory(path);
+		this.sdcard = Util.getExternalStorage(path);
 		
 		/** check if we can read */
 		if(!sdcard.canRead() || !sdcard.isDirectory()) {
