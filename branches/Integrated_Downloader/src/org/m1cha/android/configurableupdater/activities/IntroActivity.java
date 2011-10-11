@@ -1,5 +1,6 @@
 package org.m1cha.android.configurableupdater.activities;
 
+import org.m1cha.android.configurableupdater.Logger;
 import org.m1cha.android.configurableupdater.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +11,7 @@ import android.view.Window;
 
 public class IntroActivity extends Activity {
 
-	
+	private int delay = 2000;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +35,13 @@ public class IntroActivity extends Activity {
          */
         msg.what = SplashHandler.MESSAGE_TIMEOUT;
         
-        /** Send the message with a delay of 3 seconds(3000 = 3 sec) */
-        mHandler.sendMessageDelayed(msg, 2000);
+        /** disable intro in debug-mode */
+        if(Logger.DEBUG) {
+        	this.delay=0;
+        }
+        
+        /** send message with delay */
+        mHandler.sendMessageDelayed(msg, this.delay);
 		
 	}
 	
