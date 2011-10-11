@@ -13,7 +13,6 @@ import org.m1cha.android.configurableupdater.Util;
 import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
 
 public class RomList {
 	

@@ -1,7 +1,11 @@
-package org.m1cha.android.configurableupdater;
+package org.m1cha.android.configurableupdater.activities;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import org.m1cha.android.configurableupdater.DataStore;
+import org.m1cha.android.configurableupdater.R;
+import org.m1cha.android.configurableupdater.Util;
 import org.m1cha.android.configurableupdater.romtools.OptionObject;
 import org.m1cha.android.configurableupdater.romtools.RomObject;
 import android.content.DialogInterface;
