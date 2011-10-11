@@ -1,5 +1,8 @@
-package org.m1cha.android.configurableupdater;
+package org.m1cha.android.configurableupdater.activities;
 
+import org.m1cha.android.configurableupdater.DataStore;
+import org.m1cha.android.configurableupdater.R;
+import org.m1cha.android.configurableupdater.Util;
 import org.m1cha.android.configurableupdater.romtools.RomList;
 import android.app.Activity;
 import android.os.Bundle;

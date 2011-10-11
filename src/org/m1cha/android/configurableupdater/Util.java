@@ -24,6 +24,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.m1cha.android.configurableupdater.activities.MainPreferenceActivity;
+import org.m1cha.android.configurableupdater.activities.ManualActivity;
 import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -424,6 +426,6 @@ public class Util {
     	}
     	
     	/** for standard-devices */
-    	return Environment.getExternalStoragePublicDirectory(path);
+    	return new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/"+path);
     }
 }

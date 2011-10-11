@@ -1,5 +1,7 @@
-package org.m1cha.android.configurableupdater;
+package org.m1cha.android.configurableupdater.activities;
 
+import org.m1cha.android.configurableupdater.R;
+import org.m1cha.android.configurableupdater.Util;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,10 +28,6 @@ public class MainActivity extends TabActivity {
         tabHost = getTabHost();
         TabHost.TabSpec spec;
         Intent intent;
-        
-        /*intent = new Intent().setClass(this, DownloadActivity.class);
-        spec = tabHost.newTabSpec("download").setIndicator("Download").setContent(intent);
-        tabHost.addTab(spec);*/
         
         intent = new Intent().setClass(this, RomListActivity.class);
         spec = tabHost.newTabSpec("romlist").setIndicator("Rom-Liste").setContent(intent);
