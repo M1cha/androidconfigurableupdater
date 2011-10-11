@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import android.view.View.OnClickListener;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,6 +25,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.m1cha.android.configurableupdater.activities.MainPreferenceActivity;
 import org.m1cha.android.configurableupdater.activities.ManualActivity;
 import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
@@ -396,6 +399,17 @@ public class Util {
     }
     
     public static String getDefaultRomFolder(Context context) {
+    	
+    	/** look if a defaultRomFolder was set in advancedSettings */
+		try {
+			if(DataStore.advancedSettings.has("default_romFolder")) {
+				return DataStore.advancedSettings.getString("default_romFolder");
+			}
+		} catch (JSONException e) {
+			Logger.debug("advanced_defaultRomFolder", e);
+		}
+		
+		/** else return internal defaultRomFolder */
     	return context.getString(R.string.default_romFolder);
     }
     
@@ -427,5 +441,23 @@ public class Util {
     	
     	/** for standard-devices */
     	return new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/"+path);
+    }
+    
+    public static JSONObject getAdvancedSettingsFile() {
+
+    	/** try to load file */
+        try {
+        	/** parse and return JSON-Object of file */
+			return new JSONObject(Util.getStreamData(new FileInputStream(Util.getCustomFile("advanced.json"))));
+		} catch (FileNotFoundException e) {
+			Logger.debug("advancedJSON", e);
+		} catch (JSONException e) {
+			Logger.debug("advancedJSON", e);
+		} catch (IOException e) {
+			Logger.debug("advancedJSON", e);
+		}
+        
+        /** return new JSON-Object */
+        return new JSONObject();
     }
 }
