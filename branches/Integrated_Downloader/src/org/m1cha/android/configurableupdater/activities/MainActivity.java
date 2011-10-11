@@ -33,12 +33,12 @@ public class MainActivity extends TabActivity {
         
         /** create romList-Tab */
         intent = new Intent().setClass(this, RomListActivity.class);
-        spec = tabHost.newTabSpec("romlist").setIndicator("Rom-Liste").setContent(intent);
+        spec = tabHost.newTabSpec("romlist").setIndicator(getString(R.string.lang_tabControl_tabRomList)).setContent(intent);
         tabHost.addTab(spec);
         
         /** create optionSelection-Tab */
         intent = new Intent().setClass(this, OptionSelectionActivity.class);
-        spec = tabHost.newTabSpec("optionselection").setIndicator("Installieren").setContent(intent);
+        spec = tabHost.newTabSpec("optionselection").setIndicator(getString(R.string.lang_tabControl_tabOptionSelection)).setContent(intent);
         tabHost.addTab(spec);
         
         /** disable install-tab */
