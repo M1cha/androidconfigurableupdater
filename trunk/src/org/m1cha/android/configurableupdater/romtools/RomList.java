@@ -13,7 +13,6 @@ import org.m1cha.android.configurableupdater.Util;
 import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
 
 public class RomList {
 	
@@ -26,7 +25,7 @@ public class RomList {
 		this.context = context;
 		
 		/** open directory */
-		this.sdcard = Environment.getExternalStoragePublicDirectory(path);
+		this.sdcard = Util.getExternalStorage(path);
 		
 		/** check if we can read */
 		if(!sdcard.canRead() || !sdcard.isDirectory()) {
