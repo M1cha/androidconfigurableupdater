@@ -37,4 +37,6 @@
     <string name="lang_alert_FeedbackText">Wenn du einen Fehler melden willst, eröffne bitte ein Issue auf unserer GoogleCode-Seite.</string>
     <string name="lang_alert_buttonIssue">Bugmeldung</string>
     <string name="lang_alert_buttonFeedback">Feedback geben</string>
+    <string name="lang_tabControl_tabRomList">Rom-Liste</string>
+    <string name="lang_tabControl_tabOptionSelection">Optionen</string>
 </resources>
