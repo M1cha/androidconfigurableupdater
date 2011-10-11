@@ -1,53 +1,69 @@
 package org.m1cha.android.configurableupdater.activities;
 
 import org.m1cha.android.configurableupdater.R;
-import org.m1cha.android.configurableupdater.Util;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.os.Handler;
+import android.os.Message;
+import android.view.Window;
 
 public class IntroActivity extends Activity {
 
-	private MainActivity ma;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		/** get parent */
-		this.ma = (MainActivity)getParent();
-		
+		/** remove titlebar */
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
 		/** set layout */
 		setContentView(R.layout.intro);
 		
+		/** Create an object of type SplashHandler */
+        SplashHandler mHandler = new SplashHandler();
+		
+		/** Create a Message object */
+        Message msg = new Message();
+        
+        /** 
+         * Assign a unique code to the message.
+         * Later, this code will be used to identify the message in Handler class.
+         */
+        msg.what = SplashHandler.MESSAGE_TIMEOUT;
+        
+        /** Send the message with a delay of 3 seconds(3000 = 3 sec) */
+        mHandler.sendMessageDelayed(msg, 2000);
+		
 	}
 	
-	/** onClick-Handler */
-    public void onClickHandler(View view) {
-    	
-    	switch(view.getId()) {
-    		case R.id.intro_buttonManual:
-    			ma.setCurrentTab(3);
-    		break;
-    		case R.id.intro_buttonNext:
-    			ma.setCurrentTab(1);
-    		break;
-    	}
-    }
-    
-    @Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_main, menu);
-		return true;
+	/** Handler class which receives messages */
+	private class SplashHandler extends Handler {
+		
+		public static final int MESSAGE_TIMEOUT = 25863875;
+	    
+		public void handleMessage(Message msg) {
+			
+			switch (msg.what) {
+				case MESSAGE_TIMEOUT:
+					super.handleMessage(msg);
+					  
+					/** create new intent */
+					Intent intent = new Intent();
+					
+					/** set MainActivity as class */
+					intent.setClass(IntroActivity.this, MainActivity.class);
+					
+					/** start activity */
+					startActivity(intent);
+
+					/** finish IntroActivity */
+					IntroActivity.this.finish();
+				break;
+			}
+		}
 	}
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-		Util.menuHandler(this, item);
-    	return super.onOptionsItemSelected(item);
-    }
 
 }
