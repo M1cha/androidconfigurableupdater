@@ -3,9 +3,9 @@ package org.m1cha.android.configurableupdater;
 import android.util.Log;
 
 public class Logger {
-	private static String TAG = "UPDATER";
-	private static boolean DEBUG = true;
-	private static boolean PRINT_STACKTRACE = true;
+	public static final String TAG = "UPDATER";
+	public static final boolean DEBUG = true;
+	public static final boolean PRINT_STACKTRACE = true;
 	
 	public static void debug(String msg) {
 		if(DEBUG) Log.d(TAG, msg);
