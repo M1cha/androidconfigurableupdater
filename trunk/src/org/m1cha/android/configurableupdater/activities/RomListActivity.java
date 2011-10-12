@@ -108,7 +108,7 @@ public class RomListActivity extends Activity {
     	
     	switch(view.getId()) {
 			case R.id.rom_selection_buttonNext:
-				ma.setCurrentTab(2);
+				ma.setCurrentTab(1);
 			break;
 			case R.id.rom_selection_buttonChangelog:
 				if(this.changelog!=null) {
