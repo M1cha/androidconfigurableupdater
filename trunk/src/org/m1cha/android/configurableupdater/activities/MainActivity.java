@@ -47,9 +47,9 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(spec);
         
         /** change height of tabWidget */
-        for(int i=0; i<tabHost.getTabWidget().getChildCount(); i++) {
-        	tabHost.getTabWidget().getChildAt(i).getLayoutParams().height = 70;
-        }
+//        for(int i=0; i<tabHost.getTabWidget().getChildCount(); i++) {
+//        	tabHost.getTabWidget().getChildAt(i).getLayoutParams().height = 70;
+//        }
         
         /** disable install-tab */
 		tabHost.getTabWidget().getChildAt(1).setOnClickListener(new OnClickListener() {
