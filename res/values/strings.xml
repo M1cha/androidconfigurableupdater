@@ -34,13 +34,19 @@
     <string name="lang_optionSelection_buttonReboot">Reboot</string>
     <string name="lang_popup_buttonClose">Close</string>
     <string name="lang_romChangelog_title">Changelog</string>
-    <string name="default_romFolder">miuiupdater</string>
     <string name="lang_alert_buttonOk">OK</string>
     <string name="lang_alert_buttonCancel">Cancel</string>
+    <string name="lang_alert_buttonYes">Yes</string>
+    <string name="lang_alert_buttonNo">No</string>
+    <string name="lang_alert_saveSuccess">Successful.</string>
+    <string name="lang_alert_saveRequest">Options changed. Save?</string>
+    <string name="lang_alert_renameFileAlreadyExists">The File already exists.</string>
+    <string name="lang_alert_renameFileNotWritable">The File cannot be written.</string>
     <string name="lang_alert_rebootText">This will reboot into recovery.</string>
     <string name="lang_alert_FeedbackText">If you want to report a bug please open a issue on our GoogleCode-Page.</string>
     <string name="lang_alert_buttonIssue">Create Issue</string>
     <string name="lang_alert_buttonFeedback">Give Feedback</string>
     <string name="lang_tabControl_tabRomList">Rom-List</string>
     <string name="lang_tabControl_tabOptionSelection">Options</string>
+    <string name="default_romFolder">miuiupdater</string>
 </resources>
