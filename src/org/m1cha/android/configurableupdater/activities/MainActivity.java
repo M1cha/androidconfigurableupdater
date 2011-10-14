@@ -6,6 +6,7 @@ import org.m1cha.android.configurableupdater.Util;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -45,6 +46,11 @@ public class MainActivity extends TabActivity {
         spec = tabHost.newTabSpec("optionselection").setIndicator(getString(R.string.lang_tabControl_tabOptionSelection)).setContent(intent);
         tabHost.addTab(spec);
         
+        /** change height of tabWidget */
+        for(int i=0; i<tabHost.getTabWidget().getChildCount(); i++) {
+        	tabHost.getTabWidget().getChildAt(i).getLayoutParams().height = 70;
+        }
+        
         /** disable install-tab */
 		tabHost.getTabWidget().getChildAt(1).setOnClickListener(new OnClickListener() {
 					
@@ -68,6 +74,9 @@ public class MainActivity extends TabActivity {
     	
     	/** load advancedSettings-File */
         DataStore.advancedSettings = Util.getAdvancedSettingsFile();
+        
+        /** store logging-Boolean in DataStore */
+        DataStore.logging = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("logging", false);
     	
     	super.onResume();
     }
