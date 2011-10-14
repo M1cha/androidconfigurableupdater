@@ -2,7 +2,6 @@ package org.m1cha.android.configurableupdater.activities;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import org.m1cha.android.configurableupdater.DataStore;
 import org.m1cha.android.configurableupdater.R;
 import org.m1cha.android.configurableupdater.Util;
@@ -214,10 +213,7 @@ public class OptionSelectionActivity extends PreferenceActivity {
 	    bottomLayout.setBackgroundDrawable(getListView().getBackground());
 	}
 	
-	private final int OPTIONS_NOTHING_CHANGED = 0;
-	private final int OPTIONS_SUCCESS = 1;
-	private final int OPTIONS_ERROR = -1;
-	private int saveOptions(boolean alertWhenNothingChanged) {
+	private File generateNewFileName() {
 		/** generate parameter from GUI */
 		String parameter = "";
 		for(int i=0; i<this.options.size(); i++) {
@@ -243,55 +239,96 @@ public class OptionSelectionActivity extends PreferenceActivity {
 		/** create new file-object */
 		File newFile = new File(this.currentRom.getFile().getParent(), this.currentRom.getRomName()+"-"+this.currentRom.getKernelVersion()+parameter+".zip");
 		
-		/** check if anything was changed */
-		if(newFile.getName().equals(this.currentRom.getFile().getName())) {
-			if(alertWhenNothingChanged) Util.alert(this, getString(R.string.lang_error_nothingChanged));
-			return OPTIONS_NOTHING_CHANGED;
+		return newFile;
+	}
+
+	private boolean saveOptions() {
+			
+		/** get new file-object */
+		File newFile = this.generateNewFileName();
+		
+		/** return if nothing changed */
+		if(this.currentRom.isCurrentRomFile(newFile)) {
+			Util.alert(this, getString(R.string.lang_error_nothingChanged));
+			return false;
 		}
 		
-		/** check if we can write */
-		if(!this.currentRom.getFile().canWrite()) {
-			Util.alert(this, getString(R.string.lang_error_writeNewFile));
-			return OPTIONS_ERROR;
+		/** rename and check message */
+		switch(this.currentRom.renameRomFile(newFile)) {
+			case RomObject.RENAME_SUCCESS:
+			return true;
+			
+			case RomObject.RENAME_ERROR_ALREADY_EXISTS:
+				Util.alert(this, getString(R.string.lang_alert_renameFileAlreadyExists));
+			return false;
+			
+			case RomObject.RENAME_ERROR_NOT_WRITABLE:
+				Util.alert(this, getString(R.string.lang_alert_renameFileNotWritable));
+			return false;
+			
+			case RomObject.RENAME_ERROR_UNKNOWN:
+			default:
+				Util.alert(this, getString(R.string.lang_error_unknownError));
+			return false;
 		}
-		
-		/** check if file already exists */
-		if(newFile.exists()) {
-			Util.alert(this, getString(R.string.lang_error_fileExists));
-			return OPTIONS_ERROR;
-		}
-		
-		/** rename file */
-		this.currentRom.getFile().renameTo(newFile);
-		this.currentRom.setFile(newFile);
-		
-		return OPTIONS_SUCCESS;
+	}
+	
+	private void requestReboot() {
+		Util.alertOkCancel(this, getString(R.string.lang_alert_rebootText), new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				switch(which) {
+
+					case DialogInterface.BUTTON_POSITIVE:
+						Util.rebootPhone();
+					break;
+				}
+			}
+		});
 	}
 	
 	public void onClickHandler(View v) {
 		
 		if(v==OptionSelectionActivity.this.buttonSave) {
-			if(saveOptions(true)==OPTIONS_SUCCESS) {
-				/** show success-message */
-				Util.alert(this, getString(R.string.lang_menuMain_msgRestore));
+			if(this.saveOptions()) {
+				Util.alert(this, getString(R.string.lang_alert_saveSuccess));
 			}
 		}
 		
 		else if(v==OptionSelectionActivity.this.buttonReboot) {
-			Util.alertOkCancel(this, getString(R.string.lang_alert_rebootText), new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					switch(which) {
-
-						case DialogInterface.BUTTON_POSITIVE:
-							if(saveOptions(false)==OPTIONS_SUCCESS) {
-								Util.rebootPhone();
-							}
-						break;
+			
+			/** get new file-object */
+			File newFile = this.generateNewFileName();
+			
+			/** ask user to save if anything changed */
+			if(!this.currentRom.isCurrentRomFile(newFile)) {
+				Util.alertCustom(this, getString(R.string.lang_alert_saveRequest), R.string.lang_alert_buttonYes, R.string.lang_alert_buttonNo, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch(which) {
+	
+							/** save options and request reboot */
+							case DialogInterface.BUTTON_POSITIVE:
+								if(saveOptions()) {
+									requestReboot();
+								}
+							break;
+							
+							/** directly request reboot */
+							case DialogInterface.BUTTON_NEGATIVE:
+								requestReboot();
+							break;
+						}
 					}
-				}
-			});
+				});
+			}
+			
+			/** request reboot */
+			else {
+				requestReboot();
+			}
 		}
 	}
 }

@@ -36,6 +36,12 @@
     <string name="lang_romChangelog_title">Changelog</string>
     <string name="lang_alert_buttonOk">OK</string>
     <string name="lang_alert_buttonCancel">Abbrechen</string>
+    <string name="lang_alert_buttonYes">Ja</string>
+    <string name="lang_alert_buttonNo">Nein</string>
+    <string name="lang_alert_saveSuccess">Erfolgreich.</string>
+    <string name="lang_alert_saveRequest">Optionen wurden geändert. Speichern?</string>
+    <string name="lang_alert_renameFileAlreadyExists">Die Datei existiert bereits.</string>
+    <string name="lang_alert_renameFileNotWritable">Die Datei kann nicht geschrieben werden.</string>
     <string name="lang_alert_rebootText">Es wird ins Recovery gestartet.</string>
     <string name="lang_alert_FeedbackText">Wenn du einen Fehler melden willst, eröffne bitte ein Issue auf unserer GoogleCode-Seite.</string>
     <string name="lang_alert_buttonIssue">Bugmeldung</string>

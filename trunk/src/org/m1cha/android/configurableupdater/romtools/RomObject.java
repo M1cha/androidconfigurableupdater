@@ -3,7 +3,6 @@ package org.m1cha.android.configurableupdater.romtools;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -200,5 +199,43 @@ public class RomObject {
 	}
 	public String getKernelVersion() {
 		return this.kernelVersion;
+	}
+	
+	public boolean isCurrentRomFile(File f) {
+		if(f.getName().equals(this.getFile().getName())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static final int RENAME_ERROR_ALREADY_EXISTS = 100;
+	public static final int RENAME_ERROR_NOT_WRITABLE = 101;
+	public static final int RENAME_ERROR_UNKNOWN = 102;
+	public static final int RENAME_SUCCESS = -1;
+	public int renameRomFile(File f) {
+		
+		/** check if file already exists */
+		if(f.exists()) {
+			return RENAME_ERROR_ALREADY_EXISTS;
+		}
+		
+		/** check if we can write */
+		if(!this.getFile().canWrite()) {
+			return RENAME_ERROR_NOT_WRITABLE;
+		}
+		
+		/** rename file */
+		if(this.getFile().renameTo(f)) {
+			
+			/** save new filename */
+			this.setFile(f);
+		}
+		else {
+			return RENAME_ERROR_UNKNOWN;
+		}
+		
+		return RENAME_SUCCESS;
 	}
 }
