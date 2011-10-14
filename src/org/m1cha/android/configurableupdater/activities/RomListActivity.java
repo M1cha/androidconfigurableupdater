@@ -55,29 +55,69 @@ public class RomListActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		/** save currently selected Rom */
+		/** disable install-tab */
+		ma.setInstallTabEnabled(false);
+		
+		/** disable spinner */
+		this.spinner_roms.setEnabled(false);
+		
+		/** remove listener */
+		this.spinner_roms.setOnItemSelectedListener(null);
+		
+		/** save currently selected ROM if available */
 		int oldSelectionIndex = this.spinner_roms.getSelectedItemPosition();
 		String oldSelectionName = null;
 		if(oldSelectionIndex!=Spinner.INVALID_POSITION) {
 			oldSelectionName = this.romList.getRom(oldSelectionIndex).getRomName();
 		}
 		
-		
 		/** get romList */
 		this.romList = new RomList(this, PreferenceManager.getDefaultSharedPreferences(this).getString("romfolder", Util.getDefaultRomFolder(this)));
+
+		/** check for errors */
+		boolean abort=true;
+		switch(this.romList.getLastestError()) {
+			case RomList.ERROR_EXTERNAL_STORAGE_CANNOT_READ:
+				Util.alert(this, getString(R.string.lang_error_sdcardCannotRead));
+			break;
+			
+			case RomList.ERROR_DIRECTORY_NOT_FOUND:
+				Util.alert(this, getString(R.string.lang_error_directoryNotFound));
+			break;
+				
+			case RomList.ERROR_NOT_A_DIRECTORY:
+				Util.alert(this, getString(R.string.lang_error_notADirectory));
+			break;
+				
+			case RomList.ERROR_DIRECTORY_CANNOT_READ:
+				Util.alert(this, getString(R.string.lang_error_directoryCannotRead));
+			break;
+			
+			default:
+				Util.alert(this, getString(R.string.lang_error_unknownError));
+			break;
+			
+			case RomList.NO_ERROR:
+				abort=false;
+			break;
+		}
+		
+		/** get romNames */
 		this.romNames = this.romList.getRomNames();
 		
-		/** activate install-tab depending of roms were found */
+		/** disable install-Tab if no ROM's were found */
 		if(this.romNames.length<=0) {
-			ma.setInstallTabEnabled(false);
-		}
-		else {
-			ma.setInstallTabEnabled(true);
+			abort=true;
 		}
 		
-		/** add roms to spinner */
+		/** add ROM's to spinner */
 		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, romNames);
 		this.spinner_roms.setAdapter(spinnerArrayAdapter);
+		
+		/** return if errors occurred */
+		if(abort) {
+			return;
+		}
 		
 		/** onselected-Listener for spinner */
 		this.spinner_roms.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -101,6 +141,11 @@ public class RomListActivity extends Activity {
 			}
 		}
 		
+		/** enable spinner */
+		this.spinner_roms.setEnabled(true);
+		
+		/** enable install-Tab */
+		ma.setInstallTabEnabled(true);
 	}
 	
 	/** onClick-Handler */

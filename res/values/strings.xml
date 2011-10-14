@@ -5,8 +5,11 @@
     <string name="lang_manual_buttonClose">Close</string>
     <string name="lang_manual_title">Manual</string>
     <string name="lang_error_loadManual">Error loading the manual!</string>
-    <string name="lang_error_sdcard">Unable to open SDCARD!</string>
-    <string name="lang_error_directory">The specified folder does not exists!</string>
+    <string name="lang_error_sdcardCannotRead">Unable to read from SDCARD!</string>
+    <string name="lang_error_directoryNotFound">The specified directory does not exists!</string>
+    <string name="lang_error_notADirectory">The specified path is not a directory!</string>
+    <string name="lang_error_directoryCannotRead">Cannot read from the specified directory!</string>
+    <string name="lang_error_unknownError">A unknown error occured!</string>
     <string name="lang_error_writeNewFile">Unable to gain write-access!</string>
     <string name="lang_error_nothingChanged">Please change any options!</string>
     <string name="lang_error_fileExists">Another file with the new name already exists!</string>

@@ -20,16 +20,47 @@ public class RomList {
 	private ArrayList<RomObject> romList = new ArrayList<RomObject>();
 	private Context context;
 	
+	public static final int ERROR_EXTERNAL_STORAGE_CANNOT_READ = 100;
+	public static final int ERROR_DIRECTORY_NOT_FOUND = 101;
+	public static final int ERROR_NOT_A_DIRECTORY = 102;
+	public static final int ERROR_DIRECTORY_CANNOT_READ = 103;
+	public static final int NO_ERROR = -1;
+	
+	private int lastestError = NO_ERROR;
+	
+	public int getLastestError() {
+		return this.lastestError;
+	}
+	
 	public RomList(Context context, String path) {
+		
 		/** save context */
 		this.context = context;
+		
+		/** check if external storage is readable */
+		if(!Util.getExternalStorage("").canRead()) {
+			this.lastestError = ERROR_EXTERNAL_STORAGE_CANNOT_READ;
+			return;
+		}
 		
 		/** open directory */
 		this.sdcard = Util.getExternalStorage(path);
 		
-		/** check if we can read */
-		if(!sdcard.canRead() || !sdcard.isDirectory()) {
-			Util.alert(this.context, context.getString(R.string.lang_error_sdcard));
+		/** check if path exists */
+		if(!sdcard.exists()) {
+			this.lastestError = ERROR_DIRECTORY_NOT_FOUND;
+			return;
+		}
+		
+		/** check if it's a directory */
+		if(!sdcard.isDirectory()) {
+			this.lastestError = ERROR_NOT_A_DIRECTORY;
+			return;
+		}
+		
+		/** check if directory is readable */
+		if(!sdcard.canRead()) {
+			this.lastestError = ERROR_DIRECTORY_CANNOT_READ;
 			return;
 		}
 		
@@ -47,7 +78,7 @@ public class RomList {
 				try {
 					/** open zip-file */
 					ZipFile zipFile = new ZipFile(this.sdcard.getAbsolutePath()+"/"+fileName);
-					Logger.debug("opened zip-File");
+					Logger.debug("found: "+fileName);
 					
 					/** get infofile */
 					ZipEntry entry = zipFile.getEntry("version");
@@ -60,23 +91,30 @@ public class RomList {
 					
 					/** get content of updater-file */
 					String updaterFile = Util.getEntryContentAsString(zipFile, entry);
-					Logger.debug("got updater-file");
+					Logger.debug("loaded version-file");
 					
 					/** parse romObject from json-File */
+					Logger.debug("\r\n============================== START PARSING ROMOBJECT ==============================");
 					RomObject romObject = new RomObject(updaterFile, fileName);
-					Logger.debug("parsed jsonFile to RomObject");
+					Logger.debug("============================ FINISHED PARSING ROMOBJECT =============================\r\n");
 					
-					/** create and save file-object */
-					romObject.setFile(new File(this.sdcard, fileName));
-					Logger.debug("saved file-object");
+					
 					
 					/** convert and save cover */
 					if(zipFile.getEntry(romObject.getCoverFilename())!=null) {
 						ZipEntry coverEntry = zipFile.getEntry(romObject.getCoverFilename());
 						InputStream is = zipFile.getInputStream(coverEntry);
 						romObject.setCover(BitmapFactory.decodeStream(is));
+						
+						Logger.debug("loaded cover");
 					}
-					Logger.debug("tried to load cover");
+					else {
+						Logger.debug("cover not found!");
+					}
+					
+					/** create and save file-object */
+					romObject.setFile(new File(this.sdcard, fileName));
+					Logger.debug("SUCCESSFULLY PARSED ROMFILE");
 					
 					/** close zip-file */
 					zipFile.close();

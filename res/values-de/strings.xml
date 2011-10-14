@@ -5,8 +5,11 @@
     <string name="lang_manual_buttonClose">Schließen</string>
     <string name="lang_manual_title">Anleitung</string>
     <string name="lang_error_loadManual">Fehler beim laden der Anleitung!</string>
-    <string name="lang_error_sdcard">Fehler beim Zugriff auf die SD-Karte!</string>
-    <string name="lang_error_directory">Der angegebene Ordner existiert nicht!</string>
+    <string name="lang_error_sdcardCannotRead">Fehler beim Zugriff auf die SD-Karte!</string>
+    <string name="lang_error_directoryNotFound">Der angegebene Ordner konnte nicht gefunden werden!</string>
+    <string name="lang_error_notADirectory">Der angegebene Pfad ist kein Ordner!</string>
+    <string name="lang_error_directoryCannotRead">Von dem angegebenen Ordner kann nicht gelesen werden!</string>
+    <string name="lang_error_unknownError">Ein unbekannter Fehler ist aufgetreten!</string>
     <string name="lang_error_writeNewFile">Kein Schreib-Zugriff auf die SD-Karte!</string>
     <string name="lang_error_nothingChanged">Es wurden keine Optionen geändert!</string>
     <string name="lang_error_fileExists">Es exitiert bereits eine Datei mit dem neuen Namen!</string>

@@ -2,5 +2,7 @@
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
     <EditTextPreference android:title="@string/lang_menuMain_prefPathTitle" android:key="romfolder"></EditTextPreference>
+    <CheckBoxPreference android:key="logging" android:title="Log to File" android:defaultValue="false"></CheckBoxPreference>
+    
     
 </PreferenceScreen>
