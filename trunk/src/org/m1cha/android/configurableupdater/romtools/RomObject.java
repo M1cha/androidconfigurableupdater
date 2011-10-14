@@ -79,24 +79,31 @@ public class RomObject {
 			
 			/** get and save option-values */
 			option.setCategory(jsonOption.getString("category"));
-			Logger.debug("[RomObject:"+j+"] got category");
-			if(jsonOption.has("summary")) option.setSummary(jsonOption.getString("summary"));
-			Logger.debug("[RomObject:"+j+"] tried to get summary");
+			Logger.debug("[RomObject]["+j+"] got category");
+			
+			if(jsonOption.has("summary")) {
+				option.setSummary(jsonOption.getString("summary"));
+				Logger.debug("[RomObject]["+j+"] got summary");
+			}
+			else {
+				Logger.debug("[RomObject]["+j+"] no summary found!");
+			}
+			
 			option.setDisplayName(jsonOption.getString("displayname"));
-			Logger.debug("[RomObject:"+j+"] got displayname");
+			Logger.debug("[RomObject]["+j+"] got displayname");
 			option.setType(jsonOption.getString("type"));
-			Logger.debug("[RomObject:"+j+"] got type");
+			Logger.debug("[RomObject]["+j+"] got type");
 			option.setDefaultValue(jsonOption.getInt("default"));
-			Logger.debug("[RomObject:"+j+"] got defaultValue");
+			Logger.debug("[RomObject]["+j+"] got defaultValue");
 
 			/** save list if avaible */
 			if(option.getType().equals("list")) {
 				
 				/** get lists */
 				JSONArray jsonItems = jsonOption.getJSONArray("items");
-				Logger.debug("[RomObject:"+j+"|List] got items");
+				Logger.debug("[RomObject]["+j+"|List] got items");
 				JSONArray jsonValues = jsonOption.getJSONArray("values");
-				Logger.debug("[RomObject:"+j+"|List] got values");
+				Logger.debug("[RomObject]["+j+"|List] got values");
 				
 				if(jsonItems.length()!=jsonValues.length()) {
 					throw(new JSONException("'items' must have the same length like 'values'"));
@@ -109,13 +116,13 @@ public class RomObject {
 					items[k] = jsonItems.getString(k);
 					values[k] = jsonValues.getString(k);
 				}
-				Logger.debug("[RomObject:"+j+"|List] converted jsonarrays to normal arrays");
+				Logger.debug("[RomObject]["+j+"|List] converted jsonArrays to normal arrays");
 				
 				/** save arrays in option-object */
 				option.setItems(items);
-				Logger.debug("[RomObject:"+j+"|List] saved items");
+				Logger.debug("[RomObject]["+j+"|List] saved items");
 				option.setValues(values);
-				Logger.debug("[RomObject:"+j+"|List] saved values");
+				Logger.debug("[RomObject]["+j+"|List] saved values");
 				
 				/** overwrite json-default with filename-options */
 				for(int i=0; i<romNameOptions.length; i++) {
@@ -129,10 +136,11 @@ public class RomObject {
 					}
 					if(found) break;
 				}
+				Logger.debug("[RomObject]["+j+"|List] loaded defaultValues");
 			}
 			else {
 				option.setValue(jsonOption.getString("value"));
-				Logger.debug("[RomObject:"+j+"|Checkbox] got value");
+				Logger.debug("[RomObject]["+j+"|Checkbox] got value");
 				
 				/** overwrite json-default with filename-options */
 				for(int i=0; i<romNameOptions.length; i++) {
@@ -144,10 +152,12 @@ public class RomObject {
 						option.setDefaultValue(0);
 					}
 				}
+				Logger.debug("[RomObject]["+j+"|Checkbox] loaded defaultValues");
 			}
 			
 			/** add option-object to arraylist */
 			this.options.add(option);
+			Logger.debug("[RomObject]["+j+"] successfully added parsed option to list");
 		}
 	}
 	
