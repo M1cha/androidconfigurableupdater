@@ -116,6 +116,7 @@ public class RomListActivity extends Activity {
 		
 		/** return if errors occurred */
 		if(abort) {
+			this.RomSelection_noRoms();
 			return;
 		}
 		
@@ -191,5 +192,19 @@ public class RomListActivity extends Activity {
 		/** set current ROM */
 		DataStore.currentRom = this.romList.getRom(index);
 		findViewById(R.id.rom_selection_buttonNext).setEnabled(true);
+	}
+	
+	private void RomSelection_noRoms() {
+		
+		/** set cover */
+		ImageView myImage = (ImageView) findViewById(R.id.rom_selection_cover);
+		myImage.setImageResource(R.drawable.norom);
+		
+		/** disable buttons */
+		findViewById(R.id.rom_selection_buttonChangelog).setEnabled(false);
+		findViewById(R.id.rom_selection_buttonNext).setEnabled(false);
+		
+		/** delete currentRom from datastore */
+		DataStore.currentRom = null;
 	}
 }
