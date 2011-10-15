@@ -29,7 +29,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1">
             <ImageView 
-              android:src="@drawable/nocover" 
+              android:src="@drawable/norom" 
               android:layout_width="match_parent" 
               android:layout_height="match_parent"
               android:id="@+id/rom_selection_cover">
