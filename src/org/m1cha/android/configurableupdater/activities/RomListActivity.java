@@ -111,7 +111,7 @@ public class RomListActivity extends Activity {
 		}
 		
 		/** add ROM's to spinner */
-		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, romNames);
+		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.adapter_row, R.id.adapterRowContent, romNames);
 		this.spinner_roms.setAdapter(spinnerArrayAdapter);
 		
 		/** return if errors occurred */
