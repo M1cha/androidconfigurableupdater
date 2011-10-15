@@ -9,20 +9,22 @@ import android.util.Log;
 
 public class Logger {
 	public static final String TAG = "UPDATER";
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	public static final boolean PRINT_STACKTRACE = true;
 	
 	public static void debug(String msg) {
 		
 		logToFile(msg, null);
-		if(DEBUG) Log.d(TAG, msg);
+		
+		if(DEBUG || DataStore.logcat)
+			Log.d(TAG, msg);
 	}
 	
 	public static void debug(String msg, Exception e) {
 		
 		logToFile(msg, e);
 		
-		if(DEBUG) {
+		if(DEBUG || DataStore.logcat) {
 			Log.d(TAG, msg);
 			
 			if(PRINT_STACKTRACE) {
