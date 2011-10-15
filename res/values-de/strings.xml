@@ -20,6 +20,7 @@
     <string name="lang_menuMain_itemFeedSubject">Feedback zur Updater-App</string>
     <string name="lang_menuMain_itemAbout">Info</string>
     <string name="lang_menuMain_prefPathTitle">ROM-Verzeichnis</string>
+    <string name="lang_menuMain_prefCategoryGeneral">Allgemein</string>
     <string name="lang_menuMain_buttonReset">Einstellungen zurücksetzen</string>
     <string name="lang_menuMain_msgRestore">Erfolgreich!</string>
     <string name="lang_intro_buttonNext">Weiter</string>

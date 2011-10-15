@@ -20,6 +20,7 @@
     <string name="lang_menuMain_itemFeedSubject">Feedback to Updater-App</string>
     <string name="lang_menuMain_itemAbout">About</string>
     <string name="lang_menuMain_prefPathTitle">ROM-Directory</string>
+    <string name="lang_menuMain_prefCategoryGeneral">General</string>
     <string name="lang_menuMain_buttonReset">Restore Settings</string>
     <string name="lang_menuMain_msgRestore">Success!</string>
     <string name="lang_intro_buttonNext">Next</string>

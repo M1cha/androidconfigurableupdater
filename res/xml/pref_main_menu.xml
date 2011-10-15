@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
-    <EditTextPreference android:title="@string/lang_menuMain_prefPathTitle" android:key="romfolder"></EditTextPreference>
-    <ListPreference android:key="checkCRCBeforeReboot" android:entries="@array/checkCRCBeforeReboot_items" android:entryValues="@array/checkCRCBeforeReboot_values" android:summary="Calculate Checksum to make sure your update isn't corrupted." android:defaultValue="-1" android:title="CRC-Check"></ListPreference>
-    <CheckBoxPreference android:key="logging" android:title="Log to File" android:defaultValue="false"></CheckBoxPreference>
-    
-    
+  
+    <PreferenceCategory 
+      android:title="@string/lang_menuMain_prefCategoryGeneral">
+      
+    	<EditTextPreference 
+    	  android:title="@string/lang_menuMain_prefPathTitle" 
+    	  android:key="romfolder">
+    	</EditTextPreference>
+    	
+    	<ListPreference 
+    	  android:key="checkCRCBeforeReboot" 
+    	  android:entries="@array/checkCRCBeforeReboot_items" 
+    	  android:entryValues="@array/checkCRCBeforeReboot_values" 
+    	  android:summary="Calculate Checksum to make sure your update isn't corrupted." 
+    	  android:defaultValue="-1" 
+    	  android:title="CRC-Check">
+    	</ListPreference>
+   	</PreferenceCategory>
+   	
+   	
+    <PreferenceCategory 
+      android:title="Debug">
+      <CheckBoxPreference 
+        android:key="logging" 
+        android:title="Log to File" 
+        android:defaultValue="false">
+      </CheckBoxPreference>
+      
+      <CheckBoxPreference 
+        android:key="logcat" 
+        android:title="Logcat-Output" 
+        android:defaultValue="false">
+      </CheckBoxPreference>
+    </PreferenceCategory>
 </PreferenceScreen>
