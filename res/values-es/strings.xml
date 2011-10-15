@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MIUI Flag Configer</string>
-    <string name="lang_intro_buttonManual">Manual</string>
+    <string name="lang_intro_buttonManual">Instrucción</string>
     <string name="lang_manual_buttonClose">Cerrar</string>
-    <string name="lang_manual_title">Manual</string>
+    <string name="lang_manual_title">Instrucción</string>
     <string name="lang_error_loadManual">Error al cargar el manual!</string>
     <string name="lang_error_sdcardCannotRead">No se puede leer SDCARD!</string>
     <string name="lang_error_directoryNotFound">El especificada directorio no existe!</string>
@@ -14,7 +14,7 @@
     <string name="lang_error_nothingChanged">Por favor, cambie las opciones!</string>
     <string name="lang_error_fileExists">Otro archivo con el nuevo nombre ya existe!</string>
     <string name="lang_error_uncaughtException">Excepción no fue capturada</string>
-    <string name="lang_menuMain_itemManual">Manual</string>
+    <string name="lang_menuMain_itemManual">Instrucción</string>
     <string name="lang_menuMain_itemSettings">Configuración</string>
     <string name="lang_menuMain_itemFeedback">Realimentación</string>
     <string name="lang_menuMain_itemFeedSubject">Realimentación de Updater-App</string>
@@ -48,5 +48,4 @@
     <string name="lang_alert_buttonFeedback">Danos tu opinión</string>
     <string name="lang_tabControl_tabRomList">Rom-List</string>
     <string name="lang_tabControl_tabOptionSelection">Opciones</string>
-    <string name="default_romFolder">miuiupdater</string>
 </resources>
