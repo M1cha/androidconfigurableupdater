@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="checkCRCBeforeReboot_items">
+        <item>Ja</item>
+        <item>Nein</item>
+        <item>Jedesmal nachfragen</item>
+    </string-array>
+    
+</resources>

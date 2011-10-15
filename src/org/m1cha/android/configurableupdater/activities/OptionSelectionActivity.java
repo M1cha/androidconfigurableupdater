@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class OptionSelectionActivity extends PreferenceActivity {
 
@@ -273,7 +274,69 @@ public class OptionSelectionActivity extends PreferenceActivity {
 		}
 	}
 	
+	private void doCrcCheck() {
+		currentRom.checkCRC(OptionSelectionActivity.this, new RomObject.onCRCCheckFinished() {
+			
+			@Override
+			public void onFinish(boolean success) {
+				
+				/** show Toast and request reboot */
+				if(success) {
+					Toast.makeText(OptionSelectionActivity.this, getString(R.string.lang_crcCheck_successMessage),Toast.LENGTH_LONG).show();
+					requestReboot();
+				}
+				
+				/** show Toast and cancel here */
+				else {
+					Toast.makeText(OptionSelectionActivity.this, getString(R.string.lang_crcCheck_errorMessage),Toast.LENGTH_LONG).show();
+				}
+				
+				super.onFinish(success);
+			}
+		});
+	}
+	
+	private void requestCrcCheck() {
+		
+		
+		switch (DataStore.checkCRCBeforeReboot) {
+		
+			/** don't check CRC and directly request reboot */
+			case 0:
+				requestReboot();
+			break;
+			
+			/** directly check CRC and reboot after that */
+			case 1:
+				doCrcCheck();
+			break;
+	
+			/** ask the user what to do */
+			default:
+				Util.alertCustom(this, getString(R.string.lang_crcCheck_requestMessage), R.string.lang_alert_buttonYes, R.string.lang_alert_buttonNo, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch(which) {
+
+							/** check CRC and request reboot */
+							case DialogInterface.BUTTON_POSITIVE:
+								doCrcCheck();
+							break;
+							
+							/** directly request reboot */
+							case DialogInterface.BUTTON_NEGATIVE:
+								requestReboot();
+							break;
+						}
+					}
+				});
+			break;
+		}
+	}
+	
 	private void requestReboot() {
+		
 		Util.alertOkCancel(this, getString(R.string.lang_alert_rebootText), new DialogInterface.OnClickListener() {
 			
 			@Override
@@ -309,25 +372,25 @@ public class OptionSelectionActivity extends PreferenceActivity {
 					public void onClick(DialogInterface dialog, int which) {
 						switch(which) {
 	
-							/** save options and request reboot */
+							/** save options and request crcCheck */
 							case DialogInterface.BUTTON_POSITIVE:
 								if(saveOptions()) {
-									requestReboot();
+									requestCrcCheck();
 								}
 							break;
 							
-							/** directly request reboot */
+							/** directly request crcCheck */
 							case DialogInterface.BUTTON_NEGATIVE:
-								requestReboot();
+								requestCrcCheck();
 							break;
 						}
 					}
 				});
 			}
 			
-			/** request reboot */
+			/** if nothing changed, request reboot */
 			else {
-				requestReboot();
+				requestCrcCheck();
 			}
 		}
 	}

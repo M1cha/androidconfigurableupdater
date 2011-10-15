@@ -48,4 +48,8 @@
     <string name="lang_alert_buttonFeedback">Feedback geben</string>
     <string name="lang_tabControl_tabRomList">Rom-Liste</string>
     <string name="lang_tabControl_tabOptionSelection">Optionen</string>
+    <string name="lang_crcCheck_message">Berechnen der Prüfsumme...</string>
+    <string name="lang_crcCheck_requestMessage">Möchtest du die Prüfsumme berechnen?</string>
+    <string name="lang_crcCheck_successMessage">Prüfsumme ist korrekt.</string>
+    <string name="lang_crcCheck_errorMessage">Prüfsumme ist fehlerhaft.</string>
 </resources>
