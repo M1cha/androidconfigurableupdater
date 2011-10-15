@@ -75,8 +75,9 @@ public class MainActivity extends TabActivity {
     	/** load advancedSettings-File */
         DataStore.advancedSettings = Util.getAdvancedSettingsFile();
         
-        /** store logging-Boolean in DataStore */
+        /** save some settings in DataStore */
         DataStore.logging = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("logging", false);
+        DataStore.checkCRCBeforeReboot = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("checkCRCBeforeReboot", "-1"));
     	
     	super.onResume();
     }

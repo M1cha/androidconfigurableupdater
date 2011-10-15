@@ -1,14 +1,28 @@
 package org.m1cha.android.configurableupdater.romtools;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.regex.Pattern;
+import java.util.zip.CRC32;
+import java.util.zip.CheckedInputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.m1cha.android.configurableupdater.Logger;
+import org.m1cha.android.configurableupdater.R;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.view.KeyEvent;
 
 public class RomObject {
 
@@ -237,5 +251,152 @@ public class RomObject {
 		}
 		
 		return RENAME_SUCCESS;
+	}
+	
+	/**
+	 * Task for asynchronous CRC-check
+	 */
+	private class CheckCRC_Task extends AsyncTask<String, Integer, String> {
+		
+		private ZipFile zipFile;
+		
+		@Override
+		protected void onPostExecute(String result) {
+			
+			mProgressDialog.dismiss();
+			crcCheckFinishedCallback.onFinish(Boolean.parseBoolean(result));
+			
+			super.onPostExecute(result);
+		}
+		
+    	@Override
+    	protected void onProgressUpdate(Integer... args) {
+    		
+    		/** update progress-dialog */
+    		mProgressDialog.setProgress(args[0]);
+    		
+    		super.onProgressUpdate(args);
+    	}
+    	
+        @Override
+        protected String doInBackground(String... params) {
+        	
+            try {
+				/** open zipFile */
+				zipFile = new ZipFile(getFile());
+				
+				/** get entries */
+    			Enumeration<? extends ZipEntry> entries = zipFile.entries();
+    			
+    			/** calculate percentage-factor */
+    			float factor = 100/(float)(zipFile.size());
+    			
+    			/** enumerate over entries */
+    			int countProcessedEntries = 0;
+    			while(entries.hasMoreElements()) {
+    				
+    				/** count up +1 */
+    				countProcessedEntries++;
+    				
+    				/** get current entry */
+    				ZipEntry entry = entries.nextElement();
+    				
+    				/** continue if current entry is a directory */
+    				if(entry.isDirectory()) {continue;}
+    				
+    				/** initialise crc-check */
+    				InputStream fis = zipFile.getInputStream(entry);
+    				CRC32 crc = new CRC32();
+    				CheckedInputStream cis = new CheckedInputStream(fis, crc);
+    				
+    				/** calculate crc */
+    				byte[] buffer = new byte[4086];
+    				while(cis.read(buffer)>=0){}
+    				long checksum = cis.getChecksum().getValue();
+    				
+    				/** close streams */
+    				cis.close();
+    				fis.close();
+    				
+    				/** check if crc matches */
+    				if(checksum!=entry.getCrc()) {
+    					Logger.debug("Checksum-Error in File '"+entry.getName()+"'!");
+    					
+    					/** close zipFile */
+    		        	zipFile.close();
+    		        	
+    					return Boolean.toString(false);
+    				}
+    				
+    				/** publish progress */
+    				publishProgress(Math.round(factor*countProcessedEntries));
+    				Logger.debug("CRC-Progess: "+Math.round(factor*countProcessedEntries)); 
+    			}
+    			
+    			/** close zipFile */
+	        	zipFile.close();
+    			
+    			/** finish with success-message */
+	        	return Boolean.toString(true);
+				
+			} catch (ZipException e) {
+				Logger.debug("CheckCRC_Task", e);
+				return Boolean.toString(false);
+			} catch (IOException e) {
+				Logger.debug("CheckCRC_Task", e);
+				return Boolean.toString(false);
+			}
+        }        
+    }
+	
+	
+	private ProgressDialog mProgressDialog;
+	private onCRCCheckFinished crcCheckFinishedCallback;
+	private CheckCRC_Task crcTask;
+	public void checkCRC(Context c, onCRCCheckFinished callback) {
+ 
+		/** save callback */
+		this.crcCheckFinishedCallback = callback;
+		
+		/** create dialog */
+		mProgressDialog = new ProgressDialog(c);
+        mProgressDialog.setMessage(c.getString(R.string.lang_crcCheck_message));
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setMax(100);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setCancelable(false);
+        
+        /** add cancel-button */
+        mProgressDialog.setButton(c.getString(R.string.lang_alert_buttonCancel), new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				crcTask.cancel(true);
+			}
+		});
+        
+        /** FIX: Don't dismiss dialog when pressing the search-button */
+        mProgressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+            	
+                if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
+                    return true;
+                }
+                return false;
+            }
+        });
+        
+        /** show dialog */
+        mProgressDialog.show();
+        
+        /** execute Task */
+        crcTask = new CheckCRC_Task();
+        crcTask.execute();
+	}
+	
+	public static class onCRCCheckFinished {
+		public void onFinish(boolean success) {}
 	}
 }

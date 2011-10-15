@@ -48,5 +48,9 @@
     <string name="lang_alert_buttonFeedback">Give Feedback</string>
     <string name="lang_tabControl_tabRomList">Rom-List</string>
     <string name="lang_tabControl_tabOptionSelection">Options</string>
+    <string name="lang_crcCheck_message">Calculating Checksum...</string>
+    <string name="lang_crcCheck_requestMessage">Do you want to calculate the Checksum?</string>
+    <string name="lang_crcCheck_successMessage">Checksum is correct.</string>
+    <string name="lang_crcCheck_errorMessage">Checksum is invalid.</string>
     <string name="default_romFolder">miuiupdater</string>
 </resources>

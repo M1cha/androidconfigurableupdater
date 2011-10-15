@@ -8,7 +8,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.json.JSONException;
 import org.m1cha.android.configurableupdater.Logger;
-import org.m1cha.android.configurableupdater.R;
 import org.m1cha.android.configurableupdater.Util;
 import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
 import android.content.Context;
@@ -18,7 +17,6 @@ public class RomList {
 	
 	private File sdcard;
 	private ArrayList<RomObject> romList = new ArrayList<RomObject>();
-	private Context context;
 	
 	public static final int ERROR_EXTERNAL_STORAGE_CANNOT_READ = 100;
 	public static final int ERROR_DIRECTORY_NOT_FOUND = 101;
@@ -33,9 +31,6 @@ public class RomList {
 	}
 	
 	public RomList(Context context, String path) {
-		
-		/** save context */
-		this.context = context;
 		
 		/** check if external storage is readable */
 		if(!Util.getExternalStorage("").canRead()) {
