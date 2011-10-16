@@ -3,7 +3,7 @@
     <string-array name="checkCRCBeforeReboot_items">
         <item>Si</item>
         <item>No</item>
-        <item>Jedesmal nachfragen</item>
+        <item>pedir siempre</item>
     </string-array>
     
 </resources>
