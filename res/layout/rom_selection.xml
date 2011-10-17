@@ -13,7 +13,8 @@
       
         <LinearLayout
           android:layout_height="wrap_content"  
-          android:layout_width="fill_parent">
+          android:layout_width="fill_parent"
+          android:paddingTop="5dip">
            <Spinner
              android:id="@+id/rom_selection_buttonRoms" 
              android:layout_width="wrap_content" 
