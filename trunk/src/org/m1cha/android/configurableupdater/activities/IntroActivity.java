@@ -34,21 +34,22 @@ public class IntroActivity extends Activity {
 		
 		/** get custom intro-image if available */
         File introPicture = Util.getCustomFile("intro.png");
-        if(!introPicture.canRead()) {
-            Logger.debug("cannot read custom intro-image");
-            return;
+        if(introPicture.canRead() && introPicture.exists()) {
+            
+            /** try to load and display image */
+            try {
+                FileInputStream is = new FileInputStream(introPicture);
+                Bitmap bm = BitmapFactory.decodeStream(is);
+                ImageView iv = (ImageView)findViewById(R.id.intro_image);
+                iv.setImageBitmap(bm);
+            } catch (FileNotFoundException e) {
+                Logger.debug("custom intro-image not found", e);
+            }
+        }
+        else {
+        	Logger.debug("no custom intro-image found or not readable!");
         }
         
-        /** try to load and display image */
-        try {
-            FileInputStream is = new FileInputStream(introPicture);
-            Bitmap bm = BitmapFactory.decodeStream(is);
-            ImageView iv = (ImageView)findViewById(R.id.intro_image);
-            iv.setImageBitmap(bm);
-        } catch (FileNotFoundException e) {
-            Logger.debug("custom intro-image not found", e);
-        }
-		
 		/** Create an object of type SplashHandler */
         SplashHandler mHandler = new SplashHandler();
 		
