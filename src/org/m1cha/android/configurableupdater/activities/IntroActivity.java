@@ -1,13 +1,22 @@
 package org.m1cha.android.configurableupdater.activities;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import org.m1cha.android.configurableupdater.Logger;
 import org.m1cha.android.configurableupdater.R;
+import org.m1cha.android.configurableupdater.Util;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Window;
+import android.widget.ImageView;
 
 public class IntroActivity extends Activity {
 
@@ -22,6 +31,23 @@ public class IntroActivity extends Activity {
         
 		/** set layout */
 		setContentView(R.layout.intro);
+		
+		/** get custom intro-image if available */
+        File introPicture = Util.getCustomFile("intro.png");
+        if(!introPicture.canRead()) {
+            Logger.debug("cannot read custom intro-image");
+            return;
+        }
+        
+        /** try to load and display image */
+        try {
+            FileInputStream is = new FileInputStream(introPicture);
+            Bitmap bm = BitmapFactory.decodeStream(is);
+            ImageView iv = (ImageView)findViewById(R.id.intro_image);
+            iv.setImageBitmap(bm);
+        } catch (FileNotFoundException e) {
+            Logger.debug("custom intro-image not found", e);
+        }
 		
 		/** Create an object of type SplashHandler */
         SplashHandler mHandler = new SplashHandler();
