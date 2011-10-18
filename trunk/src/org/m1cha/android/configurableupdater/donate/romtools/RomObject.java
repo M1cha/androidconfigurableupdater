@@ -1,4 +1,4 @@
-package org.m1cha.android.configurableupdater.romtools;
+package org.m1cha.android.configurableupdater.donate.romtools;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +14,8 @@ import java.util.zip.ZipFile;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.m1cha.android.configurableupdater.Logger;
-import org.m1cha.android.configurableupdater.R;
+import org.m1cha.android.configurableupdater.donate.R;
+import org.m1cha.android.configurableupdater.donate.Logger;
 
 import android.app.ProgressDialog;
 import android.content.Context;

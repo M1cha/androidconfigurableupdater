@@ -1,4 +1,4 @@
-package org.m1cha.android.configurableupdater.customexceptions;
+package org.m1cha.android.configurableupdater.donate.customexceptions;
 
 @SuppressWarnings("serial")
 public class Long2IntegerException extends Exception

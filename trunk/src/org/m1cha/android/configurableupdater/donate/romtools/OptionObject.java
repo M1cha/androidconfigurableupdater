@@ -1,4 +1,4 @@
-package org.m1cha.android.configurableupdater.romtools;
+package org.m1cha.android.configurableupdater.donate.romtools;
 
 import android.preference.Preference;
 

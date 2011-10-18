@@ -1,7 +1,7 @@
-package org.m1cha.android.configurableupdater;
+package org.m1cha.android.configurableupdater.donate;
 
 import org.json.JSONObject;
-import org.m1cha.android.configurableupdater.romtools.RomObject;
+import org.m1cha.android.configurableupdater.donate.romtools.RomObject;
 
 public class DataStore {
 	public static RomObject currentRom;

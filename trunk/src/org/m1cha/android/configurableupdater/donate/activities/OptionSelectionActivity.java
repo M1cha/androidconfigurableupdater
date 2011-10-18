@@ -1,12 +1,13 @@
-package org.m1cha.android.configurableupdater.activities;
+package org.m1cha.android.configurableupdater.donate.activities;
 
 import java.io.File;
 import java.util.ArrayList;
-import org.m1cha.android.configurableupdater.DataStore;
-import org.m1cha.android.configurableupdater.R;
-import org.m1cha.android.configurableupdater.Util;
-import org.m1cha.android.configurableupdater.romtools.OptionObject;
-import org.m1cha.android.configurableupdater.romtools.RomObject;
+import org.m1cha.android.configurableupdater.donate.R;
+import org.m1cha.android.configurableupdater.donate.DataStore;
+import org.m1cha.android.configurableupdater.donate.Util;
+import org.m1cha.android.configurableupdater.donate.romtools.OptionObject;
+import org.m1cha.android.configurableupdater.donate.romtools.RomObject;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
