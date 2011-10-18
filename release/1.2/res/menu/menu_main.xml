@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  	<item android:id="@+id/menuMain_itemManual" android:title="@string/lang_menuMain_itemManual" android:icon="@android:drawable/ic_menu_help"></item>
+    <item android:id="@+id/menuMain_itemSettings" android:title="@string/lang_menuMain_itemSettings" android:icon="@android:drawable/ic_menu_preferences"></item>
+    <item android:id="@+id/menuMain_itemFeedback" android:title="@string/lang_menuMain_itemFeedback" android:icon="@android:drawable/ic_menu_send"></item>
+    <item android:id="@+id/menuMain_itemAbout" android:title="@string/lang_menuMain_itemAbout" android:icon="@android:drawable/ic_menu_info_details"></item>
+</menu>
