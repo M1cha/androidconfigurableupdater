@@ -1,9 +1,10 @@
-package org.m1cha.android.configurableupdater.activities;
+package org.m1cha.android.configurableupdater.donate.activities;
 
-import org.m1cha.android.configurableupdater.DataStore;
-import org.m1cha.android.configurableupdater.R;
-import org.m1cha.android.configurableupdater.Util;
-import org.m1cha.android.configurableupdater.romtools.RomList;
+import org.m1cha.android.configurableupdater.donate.R;
+import org.m1cha.android.configurableupdater.donate.DataStore;
+import org.m1cha.android.configurableupdater.donate.Util;
+import org.m1cha.android.configurableupdater.donate.romtools.RomList;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceManager;

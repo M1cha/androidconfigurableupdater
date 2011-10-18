@@ -1,4 +1,4 @@
-package org.m1cha.android.configurableupdater;
+package org.m1cha.android.configurableupdater.donate;
 
 import java.io.BufferedReader;
 import android.view.View.OnClickListener;
@@ -26,9 +26,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.m1cha.android.configurableupdater.activities.MainPreferenceActivity;
-import org.m1cha.android.configurableupdater.activities.ManualActivity;
-import org.m1cha.android.configurableupdater.customexceptions.Long2IntegerException;
+import org.m1cha.android.configurableupdater.donate.R;
+import org.m1cha.android.configurableupdater.donate.activities.MainPreferenceActivity;
+import org.m1cha.android.configurableupdater.donate.activities.ManualActivity;
+import org.m1cha.android.configurableupdater.donate.customexceptions.Long2IntegerException;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;

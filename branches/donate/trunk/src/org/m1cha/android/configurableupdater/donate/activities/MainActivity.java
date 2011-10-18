@@ -1,8 +1,9 @@
-package org.m1cha.android.configurableupdater.activities;
+package org.m1cha.android.configurableupdater.donate.activities;
 
-import org.m1cha.android.configurableupdater.DataStore;
-import org.m1cha.android.configurableupdater.R;
-import org.m1cha.android.configurableupdater.Util;
+import org.m1cha.android.configurableupdater.donate.R;
+import org.m1cha.android.configurableupdater.donate.DataStore;
+import org.m1cha.android.configurableupdater.donate.Util;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;

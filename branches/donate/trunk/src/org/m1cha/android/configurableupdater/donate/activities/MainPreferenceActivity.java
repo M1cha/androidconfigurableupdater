@@ -1,9 +1,10 @@
-package org.m1cha.android.configurableupdater.activities;
+package org.m1cha.android.configurableupdater.donate.activities;
 
 import java.util.Map;
 
-import org.m1cha.android.configurableupdater.R;
-import org.m1cha.android.configurableupdater.Util;
+import org.m1cha.android.configurableupdater.donate.R;
+import org.m1cha.android.configurableupdater.donate.Util;
+
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;

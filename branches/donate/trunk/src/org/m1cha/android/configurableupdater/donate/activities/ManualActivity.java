@@ -1,13 +1,14 @@
-package org.m1cha.android.configurableupdater.activities;
+package org.m1cha.android.configurableupdater.donate.activities;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import org.m1cha.android.configurableupdater.Logger;
-import org.m1cha.android.configurableupdater.R;
-import org.m1cha.android.configurableupdater.Util;
+import org.m1cha.android.configurableupdater.donate.R;
+import org.m1cha.android.configurableupdater.donate.Logger;
+import org.m1cha.android.configurableupdater.donate.Util;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
