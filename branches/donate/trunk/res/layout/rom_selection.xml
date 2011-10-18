@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@android:color/black">
+    <!-- THREE-CoL-Layout -->
+  	<LinearLayout 
+      android:layout_height="fill_parent" 
+      android:layout_width="fill_parent"
+      android:orientation="vertical">
+      
+        <LinearLayout
+          android:layout_height="wrap_content"  
+          android:layout_width="fill_parent"
+          android:paddingTop="5dip">
+           <Spinner
+             android:id="@+id/rom_selection_buttonRoms" 
+             android:layout_width="wrap_content" 
+             android:layout_weight="1" 
+             android:layout_height="50dip"
+             android:text="@string/lang_rom_selection_buttonRoms"
+             android:gravity="left|center_vertical"
+             android:layout_marginTop="5dip">
+           </Spinner>
+        </LinearLayout>
+        
+        <LinearLayout  
+          android:layout_width="fill_parent" 
+          android:layout_height="wrap_content"
+          android:layout_weight="1">
+            <ImageView 
+              android:src="@drawable/norom" 
+              android:layout_width="match_parent" 
+              android:layout_height="match_parent"
+              android:id="@+id/rom_selection_cover">
+            </ImageView>
+        </LinearLayout>
+        
+        <LinearLayout
+          android:layout_width="fill_parent" 
+          android:layout_height="wrap_content"  
+          android:gravity="bottom">
+	        <Button 
+	          android:text="@string/lang_rom_selection_buttonChangelog" 
+	          android:id="@+id/rom_selection_buttonChangelog" 
+	          android:layout_width="fill_parent" 
+	          android:layout_height="wrap_content" 
+	          android:layout_weight="1"
+	          android:onClick="onClickHandler"
+	          android:enabled="false">
+	        </Button>
+	        <Button 
+	          android:text="@string/lang_rom_selection_buttonNext" 
+	          android:id="@+id/rom_selection_buttonNext" 
+	          android:layout_width="fill_parent" 
+	          android:layout_height="wrap_content" 
+	          android:layout_weight="1"
+	          android:onClick="onClickHandler"
+	          android:enabled="false">
+	        </Button>
+        </LinearLayout>
+        
+    </LinearLayout>
+</LinearLayout>
