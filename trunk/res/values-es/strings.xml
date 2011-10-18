@@ -16,15 +16,15 @@
 	<string name="lang_error_uncaughtException">Excepción no capturada</string>
     <string name="lang_menuMain_itemManual">Manual</string>
 	<string name="lang_menuMain_itemSettings">Ajustes</string>
-	<string name="lang_menuMain_itemFeedback">Feedback</string>
+	<string name="lang_menuMain_itemFeedback">Impresiones</string>
 	<string name="lang_menuMain_itemFeedSubject">Comentarios de Updater-App</string>
 	<string name="lang_menuMain_itemAbout">Acerca de</string>
 	<string name="lang_menuMain_prefPathTitle">Directorio-ROM</string>
     <string name="lang_menuMain_prefCategoryGeneral">General</string>
-	<string name="lang_menuMain_buttonReset">Restore Settings</string>
+    <string name="lang_menuMain_buttonReset">Restaurar la Configuración</string>
 	<string name="lang_menuMain_msgRestore">Éxito!</string>
 	<string name="lang_intro_buttonNext">Siguiente</string>
-	<string name="lang_rom_selection_title">Select ROM</string>
+	<string name="lang_rom_selection_title">Seleccione Rom</string>
     <string name="lang_rom_selection_noRomSelected">ROM no Seleccionada!</string>
 	<string name="lang_rom_selection_buttonNext">Siguiente</string>
 	<string name="lang_rom_selection_buttonNoRom">No Rom?</string>
@@ -35,7 +35,7 @@
 	<string name="lang_optionSelection_buttonReboot">Reiniciar</string>
 	<string name="lang_popup_buttonClose">Cerrar</string>
 	<string name="lang_romChangelog_title">Changelog</string>
-	<string name="lang_alert_buttonOk">OK</string>
+	<string name="lang_alert_buttonOk">Aceptar</string>
 	<string name="lang_alert_buttonCancel">Cancelar</string>
     <string name="lang_alert_buttonYes">Si</string>
     <string name="lang_alert_buttonNo">No</string>
