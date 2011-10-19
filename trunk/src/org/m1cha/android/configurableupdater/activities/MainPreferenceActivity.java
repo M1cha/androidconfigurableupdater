@@ -87,7 +87,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 	private void addResetButton() {
 
 	    /** create View */
-	    LinearLayout prefRoot = Util.getPrefRoot(getWindow());
+	    LinearLayout prefRoot = Util.patchListView(getListView());
 	    LinearLayout linearLayout = new LinearLayout(prefRoot.getContext());
 	    linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 	    

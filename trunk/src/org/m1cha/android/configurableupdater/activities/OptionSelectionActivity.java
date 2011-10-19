@@ -28,7 +28,6 @@ public class OptionSelectionActivity extends PreferenceActivity {
 	public Button buttonSave, buttonReboot = null;
 	private RomObject currentRom;
 	private ArrayList<OptionObject> options;
-	private MainActivity ma;
 	private PreferenceScreen main;
 	
 	
@@ -44,22 +43,10 @@ public class OptionSelectionActivity extends PreferenceActivity {
     	return super.onOptionsItemSelected(item);
     }
 	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		
-		/** hide bottom-layout */
-		ma.getBottomLayout().setVisibility(LinearLayout.GONE);
-	}
-	
-	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    
-	    /** get parent */
-		this.ma = (MainActivity)getParent();
 	    
 	    /** set title */
 	    setTitle(R.string.lang_optionSelection_title);
@@ -75,9 +62,6 @@ public class OptionSelectionActivity extends PreferenceActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
-		/** show bottom-layout */
-		ma.getBottomLayout().setVisibility(LinearLayout.VISIBLE);
 		
 	    /** remove current preferences */
 	    main.removeAll();
@@ -172,8 +156,8 @@ public class OptionSelectionActivity extends PreferenceActivity {
 	
 	private void addButtons() {
 
-	    /** get Bottom-Layout */
-	    LinearLayout bottomLayout = ma.getBottomLayout();
+	    /** patch settings-layout */
+	    LinearLayout bottomLayout = Util.patchListView(getListView());
 	    
 	    /** create View */
 	    LinearLayout linearLayout = new LinearLayout(bottomLayout.getContext());
@@ -209,9 +193,6 @@ public class OptionSelectionActivity extends PreferenceActivity {
 	    
 	    /** add View to Bottom-Layout */
 	    bottomLayout.addView(linearLayout);
-	    
-	    /** give Bottom-Layout the same background like PreferenceScreen */
-	    bottomLayout.setBackgroundDrawable(getListView().getBackground());
 	}
 	
 	private File generateNewFileName() {
