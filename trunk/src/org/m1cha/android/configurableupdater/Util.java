@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -42,6 +41,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -262,10 +262,14 @@ public class Util {
     	popup.getContext().getTheme().applyStyle(R.style.popup_title, false);
     	popup.setContentView(R.layout.popup);
     	
+    	/** get default text-color */
+    	int textColor = new Button(context).getCurrentTextColor();
+    	
+    	
     	/** set content */
     	WebView webview = (WebView) popup.findViewById(R.id.popup_webView);
     	webview.setBackgroundColor(Color.TRANSPARENT);
-    	webview.loadData(content, "texl/html", "utf-8");
+    	webview.loadData("<style>*{color:rgb("+Color.red(textColor)+","+Color.green(textColor)+","+Color.blue(textColor)+");}</style>"+content, "texl/html", "utf-8");
     	
     	/** set onclick-Listener */
     	popup.findViewById(R.id.popup_buttonClose).setOnClickListener(new OnClickListener() {
