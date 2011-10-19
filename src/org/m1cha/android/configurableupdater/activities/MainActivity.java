@@ -10,7 +10,6 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.TabHost;
 
 
@@ -93,10 +92,6 @@ public class MainActivity extends TabActivity {
     
     public View getCurrentTabView() {
     	return this.tabHost.getCurrentView();
-    }
-    
-    public LinearLayout getBottomLayout() {
-    	return (LinearLayout)findViewById(R.id.tabhost_layoutBottom);
     }
     
     

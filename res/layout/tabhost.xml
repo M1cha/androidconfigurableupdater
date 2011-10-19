@@ -23,13 +23,5 @@
 	            android:layout_height="fill_parent"
 	            android:padding="0dp" />
 	    </LinearLayout>
-	    <LinearLayout
-          android:layout_width="fill_parent" 
-          android:layout_height="wrap_content"  
-          android:gravity="bottom"
-          android:background="@android:color/transparent"
-          android:visibility="gone"
-          android:id="@+id/tabhost_layoutBottom">
-        </LinearLayout>
 	 </LinearLayout>
 </TabHost>

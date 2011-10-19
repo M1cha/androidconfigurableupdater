@@ -42,7 +42,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 
 public class Util {
 
@@ -134,10 +137,49 @@ public class Util {
     	return (int) (dipValue * scale + 0.5f);
     }
     
+    /**
+     * @deprecated
+     */
     public static LinearLayout getPrefRoot(Window window) {
     	ViewGroup vg = (ViewGroup)window.getDecorView();
 		LinearLayout l = (LinearLayout) vg.getChildAt(0);
 		return l;
+    }
+    
+    public static LinearLayout patchListView(ListView listView) {
+		
+		/** get frame-layout */
+		FrameLayout frameLayout = (FrameLayout)listView.getParent();
+		
+		/** remove listView from frameLayout */
+		frameLayout.removeView(listView);
+		
+		/** create main layout and add it to the frameLayout */
+		LinearLayout mainLayout = new LinearLayout(listView.getContext());
+		mainLayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		mainLayout.setOrientation(LinearLayout.VERTICAL);
+		mainLayout.setBackgroundDrawable(listView.getBackground());
+		frameLayout.addView(mainLayout);
+		
+		/** create layoutParams for row1 */
+	    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+	    layoutParams.weight = 1.0f;
+		
+		/** create first row and add it to the main-layout */
+	    LinearLayout row1 = new LinearLayout(listView.getContext());
+	    row1.setLayoutParams(layoutParams);
+	    mainLayout.addView(row1);
+	    
+	    /** add listView to the first row */
+	    row1.addView(listView);
+	    
+	    /** create second row and add it to the main-layout */
+	    LinearLayout row2 = new LinearLayout(listView.getContext());
+	    row2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+	    mainLayout.addView(row2);
+	    
+	    /** return second row */
+	    return row2;
     }
     
     public static String getLayoutNameById(int id) {
